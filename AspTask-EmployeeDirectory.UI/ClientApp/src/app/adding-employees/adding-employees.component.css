@@ -1,0 +1,91 @@
+.hideEmpDetails{
+    display: none;
+}
+.employeeDetails{
+    display: flex;
+    flex-direction: column;
+    width: 870px;
+    height: 350px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: -150px;
+    margin-left: -80px;
+    box-shadow: 0 0 20px black;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    z-index: 100;
+}
+.error-message{
+    font-size: 13px;
+    color: red;
+    margin-bottom: -5px;
+}
+#propic{
+    height: 210px;
+    width: 230px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    cursor:auto;
+}
+#propic:focus{
+    border: none;
+    outline: none;
+}
+label{
+    cursor: pointer;
+    margin-left: 40px;
+    margin-top: -10px;
+    text-decoration: underline;
+}
+#fileupload{
+    display: none;
+}
+.add-employee{
+    margin-left: 20px;
+    height: 40px;
+    width: 200px;
+    padding-left: 10px;
+    margin-top: 20px;
+    font-size: 16px;
+    background: #00B1FC;
+    border: none;
+    color: white;
+}
+#cancel{
+    color: white;
+    height: 40px;
+    font-size: 16px;
+    background: #69BA00;
+    border:none;
+    margin-left: 20px;
+    width: 200px;
+    margin-top: 8px;
+}
+.employeeDetails input{
+    margin-left: 20px;
+    margin-top: 10px;
+    height: 40px;
+    width: 250px;
+    padding-left: 10px;
+}
+.editButton{
+    display: none;
+}
+#editButton{
+    color: white;
+    height: 40px;
+    font-size: 16px;
+    background: #69BA00;
+    border:none;
+    margin-left: 30px;
+    margin-top: 10px;
+    width: 100px;    
+}
+.employeeDetails select{
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 268px;
+    height: 40px;
+    padding-left: 10px;
+    cursor: pointer;
+}

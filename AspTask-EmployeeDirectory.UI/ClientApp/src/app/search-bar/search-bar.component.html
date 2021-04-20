@@ -1,0 +1,25 @@
+<div class="letter-box">
+    <div class="box">
+        <button class="active" (click) = "clearFilters()"><i class="fa fa-user" aria-hidden="true"></i></button>
+        <button *ngFor = "let alphabet of alphabets" class="alphabet-buttons" (click) = setLetter(alphabet)>{{ alphabet|uppercase }}</button>        
+    </div>
+</div>
+<div class="add-emp-button">
+    <div class="search-bar">
+        <h3>Search</h3>
+        <div class="search-bar-icon">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <input type="text" class="search-employee" [(ngModel)]="searchText" (input)="searchEmp(searchText)" placeholder="Enter any keyword">
+        </div>
+    </div>
+    <button type="submit" class="clear-button" (click) = "clearFilters()">Clear</button>
+    <div class="filter-by">
+        <h3>Filter By</h3>
+        <select class="filters" [(ngModel)] = "searchFilter">
+            <option value="none" selected disabled hidden>Select Filter</option>
+            <option *ngFor="let filter of filters" [ngValue] ="filter">{{ filter }}</option>
+        </select>
+    </div>
+    <button type="submit" class="add-emp-details" (click)="fireEvent()">Add Employee</button>
+</div>
+<p class="note"><span style="font-weight: bold;">Note: </span>Please use the advanced filter options to refine your results.</p>

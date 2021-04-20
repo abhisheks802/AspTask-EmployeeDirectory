@@ -1,0 +1,13 @@
+﻿{
+    "ProviderName": "System.Data.SqlClient",
+    "ConnectionString": "Server=DESKTOP-1K0UIDG\\SQLEXPRESS; Database = EmployeeDB; Trusted_Connection=True;",
+    "IncludeViews": true,
+    "Namespace": "AspTask_EmployeeDirectory.Data",
+    "ManuallyIncludeTables": true,
+    "Tables": {
+        "dbo.EmployeeDetails": {
+            "Include": true,
+            "ClassName": "Employee"
+        }
+    }
+}

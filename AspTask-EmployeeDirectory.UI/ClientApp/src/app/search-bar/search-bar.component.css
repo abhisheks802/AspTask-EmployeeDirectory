@@ -1,0 +1,102 @@
+.add-emp-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.search-bar-icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.search-employee{
+    margin-left: 20px;
+    height: 40px;
+    width: 250px;
+    padding-left: 35px;
+    position: relative;
+}
+.search-bar i{
+    position: absolute;
+    margin-left: -230px;
+    margin-top: 0;
+    opacity: 0.4;
+    z-index: 1;
+}
+.search-bar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #676666;
+    font-size: 15px;
+}
+.add-emp-details{
+    color: white;
+    height: 40px;
+    font-size: 16px;
+    background: #00B1FC;
+    border:none;
+    margin-left: 160px;
+    font-weight: bold;
+    width: 150px;
+}
+.clear-button{
+    color: white;
+    height: 40px;
+    font-size: 16px;
+    background: #69BA00;
+    border:none;
+    margin-left: 30px;
+    width: 100px;
+}
+.filter-by{
+    display: flex;
+    flex-direction: row;
+    margin-left: 60px;
+    align-items: center;
+}
+.filter-by h3{
+    font-size: 15px;
+    color: #676666;
+}
+.filters{
+    margin-left: 20px;
+    width: 150px;
+    height: 40px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+.letter-box{
+    display: flex;
+    flex-direction: row;
+}
+.alphabet-buttons{
+    background: #00B1FC;
+    border: none;
+    color: white;
+    padding: 8.5px 13.5px;
+    font-size: 14px;
+    margin-right: 3px;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+.active{
+    background: #69BA00;
+    border: none;
+    color: white;
+    padding: 8.5px 13.5px;
+    font-size: 14px;
+    margin-right: 3px;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+.box button:focus,.user-button:focus {
+    border: none;
+    outline: none;
+}
+.note{
+    font-size: 12px;
+}
+#dummyInput{
+    display: none;
+}

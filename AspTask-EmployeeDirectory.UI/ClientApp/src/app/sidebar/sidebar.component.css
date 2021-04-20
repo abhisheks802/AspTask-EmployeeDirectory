@@ -1,0 +1,23 @@
+.sidebar{
+    margin-top: 20px;
+    padding-left: 40px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar ul{
+    margin-top: -5px;
+    margin-left: -40px;
+}
+.sidebar h3{
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.sidebar ul li{
+    font-size: 12px;
+    list-style: none;
+    margin-top: -15px;
+}
+.sidebar ul li{
+    cursor: pointer;
+}

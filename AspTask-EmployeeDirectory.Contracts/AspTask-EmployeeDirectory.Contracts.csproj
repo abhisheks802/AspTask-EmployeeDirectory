@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>AspTask_EmployeeDirectory.Contracts</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PetaPoco" Version="5.1.306" />
+    <PackageReference Include="PetaPoco.Compiled" Version="6.0.480" />
+    <PackageReference Include="PetaPoco.DBEntityGenerator" Version="0.1.1" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AspTask-EmployeeDirectory.Data\AspTask-EmployeeDirectory.Data.csproj" />
+    <ProjectReference Include="..\AspTask-EmployeeDirectory.Models\AspTask-EmployeeDirectory.Models.csproj" />
+  </ItemGroup>
+
+</Project>

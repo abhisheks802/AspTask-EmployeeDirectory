@@ -1,0 +1,49 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 40px;
+    margin-top: 34px;
+    font-family: 'Khula', sans-serif;
+    border-bottom: 1px solid lightgray;
+    width: 1430px;
+    height: 80px;
+}
+.page-name{
+    margin-left: 30px;
+    margin-top: -20px;
+}
+.logo img{
+    height: 40px;
+    width: 140px;
+}
+.page-name h1{
+    font-size: 33px;
+    font-weight: normal;
+    color: #00B1FC;
+}
+.page-name p{
+    font-size: 17px;
+    margin-top: -38px;
+    font-weight: normal;
+}
+.welcome{
+    margin-top: 20px;
+    margin-left: 535px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.welcome h2{
+    font-weight: normal;
+}
+.welcome h2 span{
+    color: #00B1FC;
+}
+.welcome img{
+    margin-left: 20px;
+    margin-top: -37px;
+    height: 55px;
+    width: 60px;
+}

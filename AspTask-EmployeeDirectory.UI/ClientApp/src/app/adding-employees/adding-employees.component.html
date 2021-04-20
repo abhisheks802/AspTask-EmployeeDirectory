@@ -1,0 +1,23 @@
+<form class="employeeDetails" id="employeeDetails" action="#">
+    <img src="assets/img/default.jpg" id="propic">
+    <input type="text" placeholder="Enter First Name" [(ngModel)]="selectedEmployee.firstname" [ngModelOptions]="{standalone: true}"/>
+    <input type="text" placeholder="Enter Last Name" [(ngModel)]="selectedEmployee.lastname" [ngModelOptions]="{standalone: true}"/>
+    <input type="email" placeholder="Enter Email" [(ngModel)]="selectedEmployee.email" [ngModelOptions]="{standalone: true}"/>
+    <select [(ngModel)] = "selectedEmployee.jobTitle" [ngModelOptions]="{standalone: true}">
+        <option value="none" selected disabled hidden>Job Title</option>
+        <option *ngFor="let jobTitle of jobTitles" [ngValue] = 'jobTitle'>{{ jobTitle }}</option>
+    </select>
+    <select [(ngModel)] = "selectedEmployee.office" [ngModelOptions]="{standalone: true}">
+        <option value="none" selected disabled hidden>Offices</option>
+        <option *ngFor="let office of offices" [ngValue] = 'office'>{{ office }}</option>
+    </select>
+    <select [(ngModel)] = "selectedEmployee.department" [ngModelOptions]="{standalone: true}">
+        <option value="none" selected disabled hidden>Department</option>
+        <option *ngFor="let department of departments" [ngValue] = 'department'>{{ department }}</option>
+    </select>
+    <input type="number" placeholder="Enter Phone Number" min="1" [(ngModel)]="selectedEmployee.phoneNumber" [ngModelOptions]="{standalone: true}"/>
+    <input type="text" placeholder="Enter Skype Id" [(ngModel)]="selectedEmployee.skypeID" [ngModelOptions]="{standalone: true}"/>
+    <p class="error-message">{{ errorMessage }}</p>
+    <button type="button" class="add-employee" (click) = "createEmployee()">Save</button>
+    <button type="button" id="cancel" (click) = "cancelEvent()" >Cancel</button>
+</form>

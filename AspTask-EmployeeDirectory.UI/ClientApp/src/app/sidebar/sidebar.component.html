@@ -1,0 +1,20 @@
+<div class="sidebar">
+    <div class="allDepartments">
+        <h3>Departments</h3>
+        <ul *ngFor="let department of departments">
+            <li [value] = "department" (click) = "action(department)">{{ department }} ({{ departmentsCount }})</li>
+        </ul>
+    </div>
+    <div class="allOffices">
+        <h3>Offices</h3>
+        <ul *ngFor="let office of offices">
+            <li [value] = "office" (click) = "action(office)">{{ office }} ({{ officeCount(office) }})</li>
+        </ul>
+    </div>
+    <div class="allJobTitles">
+        <h3>Job Titles</h3>
+        <ul *ngFor="let jobTitle of jobTitles">
+            <li [value] = "jobTitle"(click) = "action(jobTitle)">{{ jobTitle }} ({{ jobCount(jobTitle) }})</li>
+        </ul>
+    </div>
+</div>
