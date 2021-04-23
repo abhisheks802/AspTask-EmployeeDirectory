@@ -9,7 +9,6 @@ import { FilterServiceService } from '../filter-service.service';
 export class SearchBarComponent implements OnInit {
 
   public filters : string[] = [];
-  public employeeList;
   public searchText:string = '';
   public filteredEmployeeList;
   public searchFilter:string = "Preferred Name";

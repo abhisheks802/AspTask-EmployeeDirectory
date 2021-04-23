@@ -15,8 +15,5 @@ export class AppComponent {
   public empList:any;
   public selectedEmp:any;
   public allEmployees;
-  public formNotVisible = {
-    "content-visibility": this.message,
-  }
   constructor(){}
 }
