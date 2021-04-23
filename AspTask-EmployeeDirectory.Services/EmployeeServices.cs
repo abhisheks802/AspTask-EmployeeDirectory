@@ -1,4 +1,5 @@
 ﻿using AspTask_EmployeeDirectory.Data;
+using AutoMapper;
 using PetaPoco;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace AspTask_EmployeeDirectory.Services
             var connection = "Server=DESKTOP-1K0UIDG\\SQLEXPRESS; Database = EmployeeDB; Trusted_Connection=True;";
             employeeDatabase = new Database(connection, "System.Data.SqlClient");
         }
-        public List<Employee> GetEmoloyees()
+        public List<Employee> GetEmployees()
         {
             var query = employeeDatabase.Query<Employee>("Select * from dbo.EmployeeDetails").ToList();
             return query;
@@ -38,15 +39,9 @@ namespace AspTask_EmployeeDirectory.Services
         public void UpdateEmployee(Employee employee)
         {
             var oldEmployeeDetails = GetEmployee(employee.EmployeeID);
-            oldEmployeeDetails.Firstname = employee.Firstname;
-            oldEmployeeDetails.Lastname = employee.Lastname;
-            oldEmployeeDetails.Email = employee.Email;
-            oldEmployeeDetails.Department = employee.Department;
-            oldEmployeeDetails.JobTitle = employee.JobTitle;
-            oldEmployeeDetails.Office = employee.Office;
-            oldEmployeeDetails.PreferredName = employee.PreferredName;
-            oldEmployeeDetails.PhoneNumber = employee.PhoneNumber;
-            oldEmployeeDetails.SkypeID = employee.SkypeID;
+            var map = new MapperConfiguration(config => config.CreateMap<Employee,Employee>());
+            var mapper = map.CreateMapper();
+            mapper.Map(employee, oldEmployeeDetails);
             employeeDatabase.Update(oldEmployeeDetails);
         }
     }

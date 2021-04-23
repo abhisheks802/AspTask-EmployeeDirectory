@@ -18,6 +18,6 @@
     <input type="number" placeholder="Enter Phone Number" min="1" [(ngModel)]="selectedEmployee.phoneNumber" [ngModelOptions]="{standalone: true}"/>
     <input type="text" placeholder="Enter Skype Id" [(ngModel)]="selectedEmployee.skypeID" [ngModelOptions]="{standalone: true}"/>
     <p class="error-message">{{ errorMessage }}</p>
-    <button type="button" class="add-employee" (click) = "createEmployee()">Save</button>
+    <button type="button" class="add-employee" (click) = "checkIfEmpty()">Save</button>
     <button type="button" id="cancel" (click) = "cancelEvent()" >Cancel</button>
 </form>

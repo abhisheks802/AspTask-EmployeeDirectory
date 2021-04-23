@@ -13,5 +13,4 @@ export class HeadingComponent implements OnInit {
   ngOnInit(): void {
     this.user = this._filterService.user;
   }
-
 }

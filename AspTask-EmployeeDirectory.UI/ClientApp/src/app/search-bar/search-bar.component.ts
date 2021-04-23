@@ -1,4 +1,4 @@
-import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter,Input } from '@angular/core';
 import { FilterServiceService } from '../filter-service.service';
 
 @Component({
@@ -15,6 +15,8 @@ export class SearchBarComponent implements OnInit {
   public searchFilter:string = "Preferred Name";
   public alphabets = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
   
+  @Input() public selectedEmp:any;
+  @Output() public employeeEmitter = new EventEmitter();
   @Output() public callEmployeeForm = new EventEmitter();
   @Output() public searchCriteria = new EventEmitter<String>();
   @Output() public something = new EventEmitter();
@@ -41,7 +43,8 @@ export class SearchBarComponent implements OnInit {
     }
   }
   fireEvent(){
-    this._filterService.selectedEmployee = {firstName:"",lastName:"",email:"",jobTitle:"none",office:"none",department:"none",phoneNumber:"",skypeId:"",employeeId:"",preferredName:""};
+    this.selectedEmp = {firstName:"",lastName:"",email:"",jobTitle:"none",office:"none",department:"none",phoneNumber:"",skypeID:"",employeeID:"",preferredName:""};
+    this.employeeEmitter.emit(this.selectedEmp);
     this.callEmployeeForm.emit(true);
   }
   searchEmp(searchText){

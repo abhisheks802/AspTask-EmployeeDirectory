@@ -13,27 +13,33 @@ export class AddingEmployeesComponent implements OnInit {
   public offices : string[] = [];
   public jobTitles : string[] = [];
   public errorMessage:string = "";
-  public selectedEmployee:any;
   public allEmployees:any = [];
   @Input() public message:boolean = true;
+  @Input() public selectedEmployee:any;
+  @Output() public allEmployeesEmitter = new EventEmitter(); 
   @Output() public cancelEmployeeForm = new EventEmitter();
-  constructor(private _filterService: FilterServiceService) { }
+  constructor(private _filterService: FilterServiceService) {}
   ngOnInit(): void {
     this.departments = this._filterService.getDepartments();
     this.jobTitles = this._filterService.getJobTitles();
     this.offices = this._filterService.getOffices();
-    this.selectedEmployee = this._filterService.selectedEmployee;
   }
   cancelEvent(){
     this.message = false;
     this.cancelEmployeeForm.emit(this.message);
   }
   emptyCheckString(attribute){
-    if(attribute.toString().trim() == ''){
-    return true;
+    try{
+      if(attribute.toString().trim() == ''){
+      return true;
+      }
+      else{
+        return false;
+      }
     }
-    else{
-      return false;
+    catch{
+      this.errorMessage = "Please fill all the fields";
+      return true;
     }
   }
   emptyCheckOptions(attribute){
@@ -44,16 +50,17 @@ export class AddingEmployeesComponent implements OnInit {
       return false;
     }
   }
-  // checkIfEmpty(){
-  //   if(this.emptyCheckString(this.selectedEmployee.firstName) || this.emptyCheckString(this.selectedEmployee.lastName) || this.emptyCheckString(this.selectedEmployee.email) || 
-  //     this.emptyCheckString(this.selectedEmployee.phoneNumber) || this.emptyCheckString(this.selectedEmployee.skypeId) || this.emptyCheckOptions(this.selectedEmployee.department) ||
-  //     this.emptyCheckOptions(this.selectedEmployee.office) || this.emptyCheckOptions(this.selectedEmployee.jobTitle)){
-  //     this.errorMessage = "Please fill all the fields";
-  //    }
-  //    else{
-  //      this.createEmployee();
-  //    }
-  // }
+  checkIfEmpty(){
+    if(this.emptyCheckString(this.selectedEmployee.firstname) || this.emptyCheckString(this.selectedEmployee.lastname) || this.emptyCheckString(this.selectedEmployee.email) || 
+      this.emptyCheckString(this.selectedEmployee.phoneNumber) || this.emptyCheckString(this.selectedEmployee.skypeID) || this.emptyCheckOptions(this.selectedEmployee.department) ||
+      this.emptyCheckOptions(this.selectedEmployee.office) || this.emptyCheckOptions(this.selectedEmployee.jobTitle)){
+      this.errorMessage = "Please fill all the fields";
+     }
+     else{
+       this.createEmployee();
+       this.displayEmployees();
+     }
+  }
   createEmployee(){
     let employee:Employee = new Employee();
     employee.firstname = this.selectedEmployee.firstname;
@@ -64,10 +71,11 @@ export class AddingEmployeesComponent implements OnInit {
     employee.jobTitle = this.selectedEmployee.jobTitle;
     employee.phoneNumber = this.selectedEmployee.phoneNumber;
     employee.skypeID = this.selectedEmployee.skypeID;
-    employee.preferredName = employee.firstname + " " +employee.lastname;
+    employee.preferredName = employee.firstname + " " +employee.lastname; 
     this._filterService.getAllEmployees().subscribe(data => {this.allEmployees = data;
-    var x = this.allEmployees.filter(emp => emp.employeeID == this.selectedEmployee.employeeID);
+    var x = this.allEmployees.find(emp => emp.employeeID == this.selectedEmployee.employeeID);
     if(x!=null){
+      employee.employeeID = this.selectedEmployee.employeeID;
       this._filterService.updateEmployee(employee).subscribe(res=>{
         console.log(res.toString());
       })
@@ -79,5 +87,10 @@ export class AddingEmployeesComponent implements OnInit {
     }
     })
     this.cancelEvent();
+  }
+  displayEmployees(){
+    this._filterService.getAllEmployees().subscribe(data => {this.allEmployees = data;
+      this.allEmployeesEmitter.emit(this.allEmployees);
+    })
   }
 }

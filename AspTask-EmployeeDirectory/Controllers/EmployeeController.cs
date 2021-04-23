@@ -1,8 +1,9 @@
 ﻿using AspTask_EmployeeDirectory.Data;
-using AspTask_EmployeeDirectory.Services;
+using AspTask_EmployeeDirectory.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AspTask_EmployeeDirectory.Controllers
@@ -11,17 +12,33 @@ namespace AspTask_EmployeeDirectory.Controllers
     [ApiController]
     public class EmployeeController : Controller
     {
-        private EmployeeServices EmployeeServices { get; set; }
-        public EmployeeController()
+        private Contracts.IEmployeeServices EmployeeServices { get; set; }
+        public EmployeeController(Contracts.IEmployeeServices employeeServices)
         {
-            EmployeeServices = new EmployeeServices();
+            EmployeeServices = employeeServices;
         }
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
-                return Ok(EmployeeServices.GetEmoloyees());
+                return Ok(EmployeeServices.GetEmployees());
+            }
+
+            catch
+            {
+                return BadRequest("Sorry, There is an error");
+            }
+        }
+        [Route("GetEmployeeCard")]
+        [HttpGet]
+        public IActionResult GetEmployeeCard()
+        {
+            try
+            {
+                var allEmployees = EmployeeServices.GetEmployees();
+                var allEmployeeCards = allEmployees.Select(a => new EmployeeCard() { PreferredName = a.PreferredName, Department = a.Department, JobTitle = a.JobTitle, EmployeeID = a.EmployeeID}).ToList();
+                return Ok(allEmployeeCards);
             }
 
             catch
@@ -30,29 +47,29 @@ namespace AspTask_EmployeeDirectory.Controllers
             }
         }
         [HttpPost]
-        public string Post(Employee employee)
+        public IActionResult Post(Data.Employee employee)
         {
             try
             {
                 EmployeeServices.AddEmployee(employee);
-                return "Employee Added Successfully";
+                return Ok("Employee Added Successfully");
             }
             catch
             {
-                return "Failed to Add";
+                return BadRequest("Failed to Add");
             }
         }
         [HttpPut]
-        public string Put(Employee employee)
+        public IActionResult Put(Data.Employee employee)
         {
             try
             {
                 EmployeeServices.UpdateEmployee(employee);
-                return "Updated Successfully";
+                return Ok("Updated Successfully");
             }
             catch
             {
-                return "Update Failed";
+                return BadRequest("Update Failed");
             }
         }
         [Route("{EmployeeID}")]

@@ -11,13 +11,12 @@ export class AppComponent {
   
   title = 'employee-directory';
   public cancelMessage = true;
-  public sendingText = '';
   public message = false;
-  public filteredEmployeeList;
   public empList:any;
-  @Output() public searching = new EventEmitter();
+  public selectedEmp:any;
+  public allEmployees;
   public formNotVisible = {
     "content-visibility": this.message,
   }
-  constructor(private _filterService: FilterServiceService){}
+  constructor(){}
 }

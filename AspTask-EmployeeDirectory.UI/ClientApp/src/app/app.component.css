@@ -24,7 +24,7 @@
 .content-visibility-visible{
     visibility:visible;
 }
-app-employee-card{
+app-all-employee-cards{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

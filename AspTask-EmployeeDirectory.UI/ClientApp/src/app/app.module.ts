@@ -6,12 +6,14 @@ import { HeadingComponent } from './heading/heading.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { AddingEmployeesComponent } from './adding-employees/adding-employees.component';
-import { EmployeeCardComponent } from './employee-card/employee-card.component';
 import { FilterServiceService } from './filter-service.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { from } from 'rxjs';
+import { AllEmployeeCardsComponent } from './all-employee-cards/all-employee-cards.component';
+import { EmployeeCardComponent } from './all-employee-cards/employee-card/employee-card.component';
+
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { from } from 'rxjs';
     SidebarComponent,
     SearchBarComponent,
     AddingEmployeesComponent,
+    AllEmployeeCardsComponent,
     EmployeeCardComponent,
   ],
   imports: [

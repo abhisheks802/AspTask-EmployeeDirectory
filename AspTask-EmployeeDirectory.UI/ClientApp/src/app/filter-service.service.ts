@@ -10,7 +10,6 @@ export class FilterServiceService {
 
   readonly APIUrl = "https://localhost:44370/api";
 
-  public selectedEmployee:any = {firstname:"",lastname:"",email:"",jobTitle:"",office:"",department:"",phoneNumber:"",skypeID:"",employeeID:"",preferredName:""};
   public departments: string[] = [];
   public offices: string[] = [];
   public jobTitles: string[] = [];
@@ -33,9 +32,9 @@ export class FilterServiceService {
   getAllEmployees():Observable<any[]>{
     return this.http.get<any>(this.APIUrl+'/Employee');
   }
-  // getDepartmentCount(department:string):Observable<any[]>{
-  //  return this.http.get<any>(this.APIUrl+'/Employee/GetDepartmentCount?departmentName='+department);
-  // }
+  getEmployeeCards():Observable<any[]>{
+    return this.http.get<any>(this.APIUrl+'/Employee/GetEmployeeCard');
+  }
   addEmployee(val:Employee):Observable<Employee>{
     return this.http.post<Employee>(this.APIUrl+'/Employee',val);
   }

@@ -1,0 +1,3 @@
+<div *ngFor="let employee of allEmployeeCards" (click) = "displayEmployeeDetails(employee.employeeID)">
+    <app-employee-card [employee] = "employee"></app-employee-card>
+</div>
