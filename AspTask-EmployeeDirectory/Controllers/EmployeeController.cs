@@ -3,6 +3,7 @@ using AspTask_EmployeeDirectory.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,81 +19,51 @@ namespace AspTask_EmployeeDirectory.Controllers
             EmployeeServices = employeeServices;
         }
         [HttpGet]
-        public IActionResult Get()
+        public List<Data.Employee> Get()
         {
-            try
-            {
-                return Ok(EmployeeServices.GetEmployees());
-            }
-
-            catch
-            {
-                return BadRequest("Sorry, There is an error");
-            }
+            var allEmployees = EmployeeServices.GetEmployees();
+            return allEmployees;
         }
+
         [Route("GetEmployeeCard")]
         [HttpGet]
-        public IActionResult GetEmployeeCard()
+        public List<EmployeeCard> GetEmployeeCard()
         {
-            try
-            {
-                var allEmployees = EmployeeServices.GetEmployees();
-                var allEmployeeCards = allEmployees.Select(a => new EmployeeCard() { PreferredName = a.PreferredName, Department = a.Department, JobTitle = a.JobTitle, EmployeeID = a.EmployeeID}).ToList();
-                return Ok(allEmployeeCards);
-            }
 
-            catch
-            {
-                return BadRequest("Sorry, There is an error");
-            }
+            var allEmployees = EmployeeServices.GetEmployees();
+            var allEmployeeCards = allEmployees.Select(a => new EmployeeCard() { PreferredName = a.PreferredName, Department = a.Department, JobTitle = a.JobTitle, EmployeeID = a.EmployeeID }).ToList();
+            return allEmployeeCards;
         }
+
         [HttpPost]
-        public IActionResult Post(Data.Employee employee)
+        public List<Data.Employee> Post(Data.Employee employee)
         {
-            try
-            {
-                EmployeeServices.AddEmployee(employee);
-                return Ok("Employee Added Successfully");
-            }
-            catch
-            {
-                return BadRequest("Failed to Add");
-            }
+
+            EmployeeServices.AddEmployee(employee);
+            var allEmployees = EmployeeServices.GetEmployees();
+            return allEmployees;
+
         }
         [HttpPut]
-        public IActionResult Put(Data.Employee employee)
+        public List<Data.Employee> Put(Data.Employee employee)
         {
-            try
-            {
-                EmployeeServices.UpdateEmployee(employee);
-                return Ok("Updated Successfully");
-            }
-            catch
-            {
-                return BadRequest("Update Failed");
-            }
+
+            EmployeeServices.UpdateEmployee(employee);
+            var allEmployees = EmployeeServices.GetEmployees();
+            return allEmployees;
+
         }
         [Route("{EmployeeID}")]
         [HttpDelete]
-        public string Delete(int EmployeeID)
+        public List<Data.Employee> Delete(int EmployeeID)
         {
-            try
-            {
-                var employee = EmployeeServices.GetEmployee(EmployeeID);
-                if(employee != null)
-                {
-                    EmployeeServices.DeleteEmployee(employee);
-                    return "Deleted Successfully";
-                }
-                else
-                {
-                    return "This employee does not exist";
-                }
-            }
-            catch
-            {
-                return "There was a problem in deleting";
-            }
+
+            var employee = EmployeeServices.GetEmployee(EmployeeID);
+            EmployeeServices.DeleteEmployee(employee);
+            var allEmployees = EmployeeServices.GetEmployees();
+            return allEmployees;
+
+
         }
     }
 }
