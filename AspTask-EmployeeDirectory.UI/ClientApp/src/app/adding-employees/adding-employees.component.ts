@@ -58,7 +58,6 @@ export class AddingEmployeesComponent implements OnInit {
      }
      else{
        this.createEmployee();
-       this.displayEmployees();
      }
   }
   createEmployee(){
@@ -77,20 +76,18 @@ export class AddingEmployeesComponent implements OnInit {
     if(x!=null){
       employee.employeeID = this.selectedEmployee.employeeID;
       this._filterService.updateEmployee(employee).subscribe(res=>{
-        console.log(res.toString());
+        console.log();
+        this.allEmployeesEmitter.emit(employee);
+        this.cancelEvent();
       })
     }
     else{
       this._filterService.addEmployee(employee).subscribe(res=>{
-        console.log(res.toString());
+        console.log();
+        this.allEmployeesEmitter.emit(employee);
+        this.cancelEvent();
       })
     }
-    })
-    this.cancelEvent();
-  }
-  displayEmployees(){
-    this._filterService.getAllEmployees().subscribe(data => {this.allEmployees = data;
-      this.allEmployeesEmitter.emit(this.allEmployees);
     })
   }
 }

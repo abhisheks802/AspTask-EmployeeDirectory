@@ -1,5 +1,4 @@
 ﻿using AspTask_EmployeeDirectory.Data;
-using AspTask_EmployeeDirectory.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,7 +18,7 @@ namespace AspTask_EmployeeDirectory.Controllers
             EmployeeServices = employeeServices;
         }
         [HttpGet]
-        public List<Data.Employee> Get()
+        public List<Models.Employee> Get()
         {
             var allEmployees = EmployeeServices.GetEmployees();
             return allEmployees;
@@ -27,16 +26,16 @@ namespace AspTask_EmployeeDirectory.Controllers
 
         [Route("GetEmployeeCard")]
         [HttpGet]
-        public List<EmployeeCard> GetEmployeeCard()
+        public List<Models.EmployeeCard> GetEmployeeCard()
         {
 
             var allEmployees = EmployeeServices.GetEmployees();
-            var allEmployeeCards = allEmployees.Select(a => new EmployeeCard() { PreferredName = a.PreferredName, Department = a.Department, JobTitle = a.JobTitle, EmployeeID = a.EmployeeID }).ToList();
+            var allEmployeeCards = allEmployees.Select(a => new Models.EmployeeCard() { PreferredName = a.PreferredName, Department = a.Department, JobTitle = a.JobTitle, EmployeeID = a.EmployeeID }).ToList();
             return allEmployeeCards;
         }
 
         [HttpPost]
-        public List<Data.Employee> Post(Data.Employee employee)
+        public List<Models.Employee> Post(Employee employee)
         {
 
             EmployeeServices.AddEmployee(employee);
@@ -45,25 +44,22 @@ namespace AspTask_EmployeeDirectory.Controllers
 
         }
         [HttpPut]
-        public List<Data.Employee> Put(Data.Employee employee)
+        public List<Models.Employee> Put(Employee employee)
         {
 
             EmployeeServices.UpdateEmployee(employee);
             var allEmployees = EmployeeServices.GetEmployees();
             return allEmployees;
-
         }
         [Route("{EmployeeID}")]
         [HttpDelete]
-        public List<Data.Employee> Delete(int EmployeeID)
+        public List<Models.Employee> Delete(int EmployeeID)
         {
 
             var employee = EmployeeServices.GetEmployee(EmployeeID);
             EmployeeServices.DeleteEmployee(employee);
             var allEmployees = EmployeeServices.GetEmployees();
             return allEmployees;
-
-
         }
     }
 }

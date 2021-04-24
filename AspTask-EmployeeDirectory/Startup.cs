@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace AspTask_EmployeeDirectory
 {
@@ -39,6 +40,7 @@ namespace AspTask_EmployeeDirectory
             });
             services.AddControllers();
             services.AddSingleton<Contracts.IEmployeeServices, Services.EmployeeServices>();
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

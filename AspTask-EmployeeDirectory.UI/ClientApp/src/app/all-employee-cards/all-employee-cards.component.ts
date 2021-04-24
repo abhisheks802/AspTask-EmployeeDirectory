@@ -19,8 +19,8 @@ export class AllEmployeeCardsComponent implements OnInit {
     this.displayAllEmployees();
   }
   displayAllEmployees(){
-    this.filterService.getEmployeeCards().subscribe(data=> {this.allEmployeeCards = data;
-      console.log(this.allEmployeeCards);
+    this.filterService.getAllEmployees().subscribe(data=> {this.allEmployees = data;
+      console.log(this.allEmployees);
     })
   }
   displayEmployeeDetails(id){

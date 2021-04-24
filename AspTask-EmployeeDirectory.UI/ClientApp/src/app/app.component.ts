@@ -15,5 +15,12 @@ export class AppComponent {
   public empList:any;
   public selectedEmp:any;
   public allEmployees;
-  constructor(){}
+  constructor(private filterService: FilterServiceService){}
+  updateEmployees(){
+    this.filterService.getAllEmployees().subscribe(data => {this.allEmployees = data;
+    })
+  }
+  filterEmployees(filteredEmployees){
+      this.allEmployees = filteredEmployees; 
+  }
 }
