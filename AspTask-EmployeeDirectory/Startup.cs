@@ -40,7 +40,8 @@ namespace AspTask_EmployeeDirectory
             });
             services.AddControllers();
             services.AddSingleton<Contracts.IEmployeeServices, Services.EmployeeServices>();
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(AutoMappingProfile));
+            services.AddSingleton<Contracts.IDatabase,Services.DatabaseServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace AspTask_EmployeeDirectory
 {
-    public class AutoMapping: Profile
+    public class AutoMappingProfile: Profile
     {
-        public AutoMapping()
+        public AutoMappingProfile()
         {
-            CreateMap<Employee, Employee>();
+            CreateMap<Employee, Models.Employee>();
         }
     }
 }

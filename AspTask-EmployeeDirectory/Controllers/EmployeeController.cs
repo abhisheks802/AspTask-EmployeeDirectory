@@ -46,7 +46,6 @@ namespace AspTask_EmployeeDirectory.Controllers
         [HttpPut]
         public List<Models.Employee> Put(Employee employee)
         {
-
             EmployeeServices.UpdateEmployee(employee);
             var allEmployees = EmployeeServices.GetEmployees();
             return allEmployees;
@@ -55,7 +54,6 @@ namespace AspTask_EmployeeDirectory.Controllers
         [HttpDelete]
         public List<Models.Employee> Delete(int EmployeeID)
         {
-
             var employee = EmployeeServices.GetEmployee(EmployeeID);
             EmployeeServices.DeleteEmployee(employee);
             var allEmployees = EmployeeServices.GetEmployees();

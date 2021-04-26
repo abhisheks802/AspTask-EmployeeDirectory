@@ -10,40 +10,40 @@ namespace AspTask_EmployeeDirectory.Services
 {
     public class EmployeeServices:Contracts.IEmployeeServices
     {
-        private Database employeeDatabase;
+        private Contracts.IDatabase EmployeeDatabase;
         private AutoMapper.IMapper Mapper { get; set; }
-        public EmployeeServices(AutoMapper.IMapper mapper)
+        public EmployeeServices(AutoMapper.IMapper mapper, Contracts.IDatabase employeeDatabase)
         {
+            EmployeeDatabase = employeeDatabase;
             Mapper = mapper;
-            var connection = "Server=DESKTOP-1K0UIDG\\SQLEXPRESS; Database = EmployeeDB; Trusted_Connection=True;";
-            employeeDatabase = new Database(connection, "System.Data.SqlClient");
         }
         public List<Models.Employee> GetEmployees()
         {
-            var query = employeeDatabase.Query<Models.Employee>("Select * from dbo.EmployeeDetails").ToList();
-            return query;
+            var query = EmployeeDatabase.DatabaseConnection().Query<Employee>("Select * from dbo.EmployeeDetails").ToList();
+            var modelEmployeeList = Mapper.Map<List<Employee>, List < Models.Employee >>(query);
+            return modelEmployeeList;
         }
         public Employee GetEmployee(int employeeID)
         {
-            var query = employeeDatabase.SingleOrDefault<Employee>("Select * from dbo.EmployeeDetails where EmployeeID="+employeeID);
+            var query = EmployeeDatabase.DatabaseConnection().SingleOrDefault<Employee>("Select * from dbo.EmployeeDetails where EmployeeID="+employeeID);
             return query;
         }
         public bool AddEmployee(Employee employee)
         {
             var emp = new Employee { Firstname = employee.Firstname, Lastname = employee.Lastname, Email = employee.Email, Department = employee.Department, JobTitle = employee.JobTitle, Office = employee.Office, PhoneNumber = employee.PhoneNumber, SkypeID = employee.SkypeID, PreferredName = employee.PreferredName };
-            employeeDatabase.Insert(emp);
+            EmployeeDatabase.DatabaseConnection().Insert(emp);
             return true;
         }
         public bool DeleteEmployee(Employee employee)
         {
-            employeeDatabase.Delete("dbo.EmployeeDetails", "EmployeeID", employee);
+            EmployeeDatabase.DatabaseConnection().Delete("dbo.EmployeeDetails", "EmployeeID", employee);
             return true;
         }
         public bool UpdateEmployee(Employee employee)
         {
             var oldEmployeeDetails = GetEmployee(employee.EmployeeID);
-            Mapper.Map(employee, oldEmployeeDetails);
-            employeeDatabase.Update(oldEmployeeDetails);
+            oldEmployeeDetails = employee;
+            EmployeeDatabase.DatabaseConnection().Update(oldEmployeeDetails);
             return true;
         }
         
