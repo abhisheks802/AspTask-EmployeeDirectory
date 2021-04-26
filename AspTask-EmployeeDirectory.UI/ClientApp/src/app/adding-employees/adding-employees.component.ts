@@ -16,7 +16,7 @@ export class AddingEmployeesComponent implements OnInit {
   public allEmployees:any = [];
   @Input() public message:boolean = true;
   @Input() public selectedEmployee:any;
-  @Output() public allEmployeesEmitter = new EventEmitter(); 
+  @Output() public updateEmployeesEmitter = new EventEmitter(); 
   @Output() public cancelEmployeeForm = new EventEmitter();
   constructor(private _filterService: FilterServiceService) {}
   ngOnInit(): void {
@@ -72,19 +72,17 @@ export class AddingEmployeesComponent implements OnInit {
     employee.skypeID = this.selectedEmployee.skypeID;
     employee.preferredName = employee.firstname + " " +employee.lastname; 
     this._filterService.getAllEmployees().subscribe(data => {this.allEmployees = data;
-    var x = this.allEmployees.find(emp => emp.employeeID == this.selectedEmployee.employeeID);
-    if(x!=null){
+    var findEmployee = this.allEmployees.find(emp => emp.employeeID == this.selectedEmployee.employeeID);
+    if(findEmployee!=null){
       employee.employeeID = this.selectedEmployee.employeeID;
       this._filterService.updateEmployee(employee).subscribe(res=>{
-        console.log();
-        this.allEmployeesEmitter.emit(employee);
+        this.updateEmployeesEmitter.emit(employee);
         this.cancelEvent();
       })
     }
     else{
       this._filterService.addEmployee(employee).subscribe(res=>{
-        console.log();
-        this.allEmployeesEmitter.emit(employee);
+        this.updateEmployeesEmitter.emit(employee);
         this.cancelEvent();
       })
     }

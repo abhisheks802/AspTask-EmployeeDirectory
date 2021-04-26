@@ -11,8 +11,6 @@ export class SidebarComponent implements OnInit {
   public departments: string[] = [];
   public offices : string[] = [];
   public jobTitles : string[] = [];
-  //public allEmployees:any = [];
-  public departmentsCount = 0;
   public filteredEmployees;
   @Input() allEmployees;
   @Output() filteredEmployeesEmitter = new EventEmitter();

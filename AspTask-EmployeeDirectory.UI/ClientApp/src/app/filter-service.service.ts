@@ -1,4 +1,4 @@
-import { Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Employee } from 'src/assets/employee';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -10,10 +10,6 @@ export class FilterServiceService {
 
   readonly APIUrl = "https://localhost:44370/api";
 
-  public departments: string[] = [];
-  public offices: string[] = [];
-  public jobTitles: string[] = [];
-  public filters: string[] = [];
   user:Employee = {firstname:"Andrew",lastname:"Philips",email:"and124@gmail.com",jobTitle:"BI Developer",office:"Seattle",department:"IT",phoneNumber:9986452253,skypeID:"897612",employeeID:1,preferredName:"Andrew Philips"};
   constructor(private http:HttpClient) {}
 

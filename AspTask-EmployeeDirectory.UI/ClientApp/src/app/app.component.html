@@ -5,7 +5,7 @@
     <div class="main-content">
       <app-search-bar [ngClass] = "message?'content-visibility':''" (clearFilter)="updateEmployees()" (filteredEmployeesEmitter)="filterEmployees($event)" [selectedEmp]="selectedEmp" (employeeEmitter)="selectedEmp=$event" (callEmployeeForm) = "message = $event" (something) = "empList = $event"></app-search-bar>
       <div class="all-emp-activity" [ngClass] = "message?'remove-border':''">
-        <app-adding-employees *ngIf = "message" [selectedEmployee]="selectedEmp"  [message] = 'message' (allEmployeesEmitter)="updateEmployees()" (cancelEmployeeForm) = "message = $event"></app-adding-employees>
+        <app-adding-employees *ngIf = "message" [selectedEmployee]="selectedEmp"  [message] = 'message' (updateEmployeesEmitter)="updateEmployees()" (cancelEmployeeForm) = "message = $event"></app-adding-employees>
         <div class="all-employees">
           <app-all-employee-cards [ngClass] = "message?'content-visibility':''" [allEmployees]="allEmployees" [message] = 'message' (employeeEmitter)="selectedEmp=$event"  (displayEmployeeForm) = "message = $event"></app-all-employee-cards>
         </div>
