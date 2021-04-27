@@ -1,16 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
+using PetaPoco;
 
 namespace AspTask_EmployeeDirectory
 {
@@ -41,7 +37,11 @@ namespace AspTask_EmployeeDirectory
             services.AddControllers();
             services.AddSingleton<Contracts.IEmployeeServices, Services.EmployeeServices>();
             services.AddAutoMapper(typeof(AutoMappingProfile));
-            services.AddSingleton<Contracts.IDatabase,Services.DatabaseServices>();
+            var connection = DatabaseConfiguration.Build()
+                .UsingConnectionString("Server=DESKTOP-1K0UIDG\\SQLEXPRESS; Database = EmployeeDB; Trusted_Connection=True;")
+                .UsingProviderName("System.Data.SqlClient")
+                .Create();
+            services.AddSingleton(connection);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
