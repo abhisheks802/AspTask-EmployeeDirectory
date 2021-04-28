@@ -30,7 +30,7 @@ namespace AspTask_EmployeeDirectory.Services
         }
         public bool AddEmployee(Employee employee)
         {
-            var emp = new Employee { Firstname = employee.Firstname, Lastname = employee.Lastname, Email = employee.Email, Department = employee.Department, JobTitle = employee.JobTitle, Office = employee.Office, PhoneNumber = employee.PhoneNumber, SkypeID = employee.SkypeID, PreferredName = employee.PreferredName };
+            var emp = new Employee { Firstname = employee.Firstname, Lastname = employee.Lastname, Email = employee.Email, DepartmentID = employee.DepartmentID, JobTitleID = employee.JobTitleID, OfficeID = employee.OfficeID, PhoneNumber = employee.PhoneNumber, SkypeID = employee.SkypeID, PreferredName = employee.PreferredName };
             EmployeeDatabase.Insert(emp);
             return true;
         }

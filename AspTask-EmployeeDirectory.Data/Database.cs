@@ -34,23 +34,58 @@ namespace AspTask_EmployeeDirectory.Data
         }
     }
 
+    [TableName("[dbo].[Department]")]
+    [PrimaryKey("DepartmentID")]
+    [ExplicitColumns]
+    public partial class Department
+        : Record<Department>
+    {
+        [Column]
+        public int DepartmentID
+        {
+            get { return _DepartmentID; }
+            set
+            {
+                _DepartmentID = value;
+                MarkColumnModified("DepartmentID");
+            }
+        }
+
+        private int _DepartmentID;
+
+        [Column]
+        public string DepartmentName
+        {
+            get { return _DepartmentName; }
+            set
+            {
+                _DepartmentName = value;
+                MarkColumnModified("DepartmentName");
+            }
+        }
+
+        private string _DepartmentName;
+
+    }
+
     [TableName("[dbo].[EmployeeDetails]")]
+    [PrimaryKey("EmployeeID")]
     [ExplicitColumns]
     public partial class Employee
         : Record<Employee>
     {
         [Column]
-        public string Department
+        public int? DepartmentID
         {
-            get { return _Department; }
+            get { return _DepartmentID; }
             set
             {
-                _Department = value;
-                MarkColumnModified("Department");
+                _DepartmentID = value;
+                MarkColumnModified("DepartmentID");
             }
         }
 
-        private string _Department;
+        private int? _DepartmentID;
 
         [Column]
         public string Email
@@ -92,17 +127,17 @@ namespace AspTask_EmployeeDirectory.Data
         private string _Firstname;
 
         [Column]
-        public string JobTitle
+        public int? JobTitleID
         {
-            get { return _JobTitle; }
+            get { return _JobTitleID; }
             set
             {
-                _JobTitle = value;
-                MarkColumnModified("JobTitle");
+                _JobTitleID = value;
+                MarkColumnModified("JobTitleID");
             }
         }
 
-        private string _JobTitle;
+        private int? _JobTitleID;
 
         [Column]
         public string Lastname
@@ -118,17 +153,17 @@ namespace AspTask_EmployeeDirectory.Data
         private string _Lastname;
 
         [Column]
-        public string Office
+        public int? OfficeID
         {
-            get { return _Office; }
+            get { return _OfficeID; }
             set
             {
-                _Office = value;
-                MarkColumnModified("Office");
+                _OfficeID = value;
+                MarkColumnModified("OfficeID");
             }
         }
 
-        private string _Office;
+        private int? _OfficeID;
 
         [Column]
         public long? PhoneNumber
@@ -168,6 +203,147 @@ namespace AspTask_EmployeeDirectory.Data
         }
 
         private string _SkypeID;
+
+    }
+
+    [TableName("[dbo].[JobTitle]")]
+    [PrimaryKey("JobID")]
+    [ExplicitColumns]
+    public partial class JobTitle
+        : Record<JobTitle>
+    {
+        [Column]
+        public int JobID
+        {
+            get { return _JobID; }
+            set
+            {
+                _JobID = value;
+                MarkColumnModified("JobID");
+            }
+        }
+
+        private int _JobID;
+
+        [Column]
+        public string JobName
+        {
+            get { return _JobName; }
+            set
+            {
+                _JobName = value;
+                MarkColumnModified("JobName");
+            }
+        }
+
+        private string _JobName;
+
+    }
+
+    [TableName("[dbo].[Office]")]
+    [PrimaryKey("OfficeID")]
+    [ExplicitColumns]
+    public partial class Office
+        : Record<Office>
+    {
+        [Column]
+        public int OfficeID
+        {
+            get { return _OfficeID; }
+            set
+            {
+                _OfficeID = value;
+                MarkColumnModified("OfficeID");
+            }
+        }
+
+        private int _OfficeID;
+
+        [Column]
+        public string OfficeName
+        {
+            get { return _OfficeName; }
+            set
+            {
+                _OfficeName = value;
+                MarkColumnModified("OfficeName");
+            }
+        }
+
+        private string _OfficeName;
+
+    }
+
+    [TableName("[dbo].[sysdiagrams]")]
+    [PrimaryKey("diagram_id")]
+    [ExplicitColumns]
+    public partial class sysdiagram
+        : Record<sysdiagram>
+    {
+        [Column]
+        public byte[] definition
+        {
+            get { return _definition; }
+            set
+            {
+                _definition = value;
+                MarkColumnModified("definition");
+            }
+        }
+
+        private byte[] _definition;
+
+        [Column]
+        public int diagram_id
+        {
+            get { return _diagram_id; }
+            set
+            {
+                _diagram_id = value;
+                MarkColumnModified("diagram_id");
+            }
+        }
+
+        private int _diagram_id;
+
+        [Column]
+        public string name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                MarkColumnModified("name");
+            }
+        }
+
+        private string _name;
+
+        [Column]
+        public int principal_id
+        {
+            get { return _principal_id; }
+            set
+            {
+                _principal_id = value;
+                MarkColumnModified("principal_id");
+            }
+        }
+
+        private int _principal_id;
+
+        [Column]
+        public int? version
+        {
+            get { return _version; }
+            set
+            {
+                _version = value;
+                MarkColumnModified("version");
+            }
+        }
+
+        private int? _version;
 
     }
 

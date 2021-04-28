@@ -8,6 +8,18 @@
         "dbo.EmployeeDetails": {
             "Include": true,
             "ClassName": "Employee"
+        },
+        "dbo.Department": {
+            "Include": true,
+            "ClassName": "Department"
+        },
+        "dbo.Office": {
+            "Include": true,
+            "ClassName": "Office"
+        },
+        "dbo.JobTitle": {
+            "Include": true,
+            "ClassName": "JobTitle"
         }
     }
 }

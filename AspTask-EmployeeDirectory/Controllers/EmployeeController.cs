@@ -30,7 +30,7 @@ namespace AspTask_EmployeeDirectory.Controllers
         {
 
             var allEmployees = EmployeeServices.GetEmployees();
-            var allEmployeeCards = allEmployees.Select(a => new Models.EmployeeCard() { PreferredName = a.PreferredName, Department = a.Department, JobTitle = a.JobTitle, EmployeeID = a.EmployeeID }).ToList();
+            var allEmployeeCards = allEmployees.Select(a => new Models.EmployeeCard() { PreferredName = a.PreferredName, DepartmentID = a.DepartmentID, JobTitleID = a.JobTitleID, EmployeeID = a.EmployeeID }).ToList();
             return allEmployeeCards;
         }
 

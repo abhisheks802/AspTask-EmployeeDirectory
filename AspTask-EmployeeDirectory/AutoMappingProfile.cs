@@ -12,6 +12,9 @@ namespace AspTask_EmployeeDirectory
         public AutoMappingProfile()
         {
             CreateMap<Employee, Models.Employee>();
+            CreateMap<Department, Models.Department>();
+            CreateMap<Office, Models.Office>();
+            CreateMap<JobTitle, Models.JobTitle>();
         }
     }
 }

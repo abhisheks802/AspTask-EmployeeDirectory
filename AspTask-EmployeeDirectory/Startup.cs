@@ -36,9 +36,12 @@ namespace AspTask_EmployeeDirectory
             });
             services.AddControllers();
             services.AddSingleton<Contracts.IEmployeeServices, Services.EmployeeServices>();
+            services.AddSingleton<Contracts.IDepartmentServices, Services.DepartmentServices>();
+            services.AddSingleton<Contracts.IOfficeServices, Services.OfficeServices>();
+            services.AddSingleton<Contracts.IJobTitleServices, Services.JobtTitleServices>();
             services.AddAutoMapper(typeof(AutoMappingProfile));
             var connection = DatabaseConfiguration.Build()
-                .UsingConnectionString("Server=DESKTOP-1K0UIDG\\SQLEXPRESS; Database = EmployeeDB; Trusted_Connection=True;")
+                .UsingConnectionString(Configuration.GetConnectionString("DatabaseConnection"))
                 .UsingProviderName("System.Data.SqlClient")
                 .Create();
             services.AddSingleton(connection);
