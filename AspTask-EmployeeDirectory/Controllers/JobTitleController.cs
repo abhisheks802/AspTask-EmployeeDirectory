@@ -39,11 +39,10 @@ namespace AspTask_EmployeeDirectory.Controllers
             return allJobTitles;
         }
         [Route("{JobID}")]
-        [HttpDelete]
+        [HttpGet]
         public List<Models.JobTitle> Delete(int JobID)
         {
-            var jobTitle = JobTitleServices.GetJobTitle(JobID);
-            JobTitleServices.DeleteJobTitle(jobTitle);
+            JobTitleServices.DeleteJobTitle(JobID);
             var allJobTitles = JobTitleServices.GetJobTitles();
             return allJobTitles;
         }

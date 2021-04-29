@@ -39,11 +39,10 @@ namespace AspTask_EmployeeDirectory.Controllers
             return allOffices;
         }
         [Route("{OfficeID}")]
-        [HttpDelete]
+        [HttpGet]
         public List<Models.Office> Delete(int OfficeID)
         {
-            var office = OfficeServices.GetOffice(OfficeID);
-            OfficeServices.DeleteOffice(office);
+            OfficeServices.DeleteOffice(OfficeID);
             var allOffices = OfficeServices.GetOffices();
             return allOffices;
         }

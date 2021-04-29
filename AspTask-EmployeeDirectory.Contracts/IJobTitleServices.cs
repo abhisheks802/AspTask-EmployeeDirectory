@@ -11,7 +11,7 @@ namespace AspTask_EmployeeDirectory.Contracts
         public JobTitle GetJobTitle(int jobID);
         public bool AddJob(JobTitle jobTitle);
         public bool UpdateJobTitle(JobTitle jobTitle);
-        public bool DeleteJobTitle(JobTitle jobTitle);
+        public bool DeleteJobTitle(int JobID);
 
     }
 }

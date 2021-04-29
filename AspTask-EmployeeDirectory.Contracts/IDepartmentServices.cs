@@ -11,6 +11,6 @@ namespace AspTask_EmployeeDirectory.Contracts
         public Department GetDepartment(int departmentID);
         public bool AddDepartment(Department department);
         public bool UpdateDepartment(Department department);
-        public bool DeleteDepartment(Department department);
+        public bool DeleteDepartment(int DepartmentID);
     }
 }

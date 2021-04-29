@@ -8,5 +8,6 @@ namespace AspTask_EmployeeDirectory.Models
     {
         public int DepartmentID { get; set; }
         public string DepartmentName { get; set; }
+        public string DepartmentStatus { get; set; }
     }
 }

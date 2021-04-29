@@ -10,7 +10,7 @@ namespace AspTask_EmployeeDirectory.Contracts
         public List<Models.Employee> GetEmployees();
         public Employee GetEmployee(int employeeID);
         public bool AddEmployee(Employee employee);
-        public bool DeleteEmployee(Employee employee);
+        public bool DeleteEmployee(int EmployeeID);
         public bool UpdateEmployee(Employee employee);
     }
 }

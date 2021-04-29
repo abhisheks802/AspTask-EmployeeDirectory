@@ -19,18 +19,18 @@ namespace AspTask_EmployeeDirectory.Services
         }
         public List<Models.Department> GetDepartments()
         {
-            var query = EmployeeDatabase.Query<Department>("Select * from dbo.Department").ToList();
+            var query = EmployeeDatabase.Query<Department>("Select * from dbo.Department where DepartmentStatus='Active'").ToList();
             var modelDepartmentList = Mapper.Map<List<Department>, List<Models.Department>>(query);
             return modelDepartmentList;
         }
         public Department GetDepartment(int departmentID)
         {
-            var query = EmployeeDatabase.SingleOrDefault<Department>("Select * from dbo.Department where DepartmentID=" + departmentID);
+            var query = EmployeeDatabase.FirstOrDefault<Department>("Select * from dbo.Department where DepartmentID=" + departmentID);
             return query;
         }
         public bool AddDepartment(Department department)
         {
-            var dep = new Department { DepartmentName = department.DepartmentName };
+            var dep = new Department { DepartmentName = department.DepartmentName, DepartmentStatus = department.DepartmentStatus };
             EmployeeDatabase.Insert("dbo.Department",dep);
             return true;
         }
@@ -41,9 +41,11 @@ namespace AspTask_EmployeeDirectory.Services
             EmployeeDatabase.Update("dbo.Department", "DepartmentID",oldDepartmentDetails);
             return true;
         }
-        public bool DeleteDepartment(Department department)
+        public bool DeleteDepartment(int DepartmentID)
         {
-            EmployeeDatabase.Delete("dbo.Department", "DepartmentID", department);
+            var department = GetDepartment(DepartmentID);
+            department.DepartmentStatus = "Inactive";
+            EmployeeDatabase.Update("dbo.Department", "DepartmentID", department);
             return true;
         }
     }

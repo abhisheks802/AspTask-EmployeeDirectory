@@ -51,11 +51,10 @@ namespace AspTask_EmployeeDirectory.Controllers
             return allEmployees;
         }
         [Route("{EmployeeID}")]
-        [HttpDelete]
+        [HttpGet]
         public List<Models.Employee> Delete(int EmployeeID)
         {
-            var employee = EmployeeServices.GetEmployee(EmployeeID);
-            EmployeeServices.DeleteEmployee(employee);
+            EmployeeServices.DeleteEmployee(EmployeeID);
             var allEmployees = EmployeeServices.GetEmployees();
             return allEmployees;
         }

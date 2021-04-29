@@ -11,6 +11,6 @@ namespace AspTask_EmployeeDirectory.Contracts
         public Office GetOffice(int officeID);
         public bool AddOffice(Office office);
         public bool UpdateOffice(Office office);
-        public bool DeleteOffice(Office office);
+        public bool DeleteOffice(int OfficeID);
     }
 }

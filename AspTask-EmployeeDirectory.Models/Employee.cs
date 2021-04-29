@@ -16,5 +16,6 @@ namespace AspTask_EmployeeDirectory.Models
         public string SkypeID { get; set; }
         public string PreferredName { get; set; }
         public int EmployeeID { get; set; }
+        public string EmployeeStatus { get; set; }
     }
 }

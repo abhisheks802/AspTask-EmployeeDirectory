@@ -18,18 +18,18 @@ namespace AspTask_EmployeeDirectory.Services
         }
         public List<Models.Office> GetOffices()
         {
-            var query = EmployeeDatabase.Query<Office>("Select * from dbo.Office").ToList();
+            var query = EmployeeDatabase.Query<Office>("Select * from dbo.Office where OfficeStatus='Active'").ToList();
             var modelOfficeList = Mapper.Map<List<Office>, List<Models.Office>>(query);
             return modelOfficeList;
         }
         public Office GetOffice(int officeID)
         {
-            var query = EmployeeDatabase.SingleOrDefault<Office>("Select * from dbo.Office where OfficeID=" + officeID);
+            var query = EmployeeDatabase.FirstOrDefault<Office>("Select * from dbo.Office where OfficeID=" + officeID);
             return query;
         }
         public bool AddOffice(Office office)
         {
-            var ofc = new Office { OfficeName = office.OfficeName};
+            var ofc = new Office { OfficeName = office.OfficeName, OfficeStatus = office.OfficeStatus};
             EmployeeDatabase.Insert("dbo.Office", ofc);
             return true;
         }
@@ -40,9 +40,11 @@ namespace AspTask_EmployeeDirectory.Services
             EmployeeDatabase.Update("dbo.Office", "OfficeID", oldOfficeDetails);
             return true;
         }
-        public bool DeleteOffice(Office office)
+        public bool DeleteOffice(int officeID)
         {
-            EmployeeDatabase.Delete("dbo.Office", "OfficeID", office);
+            var office = GetOffice(officeID);
+            office.OfficeStatus = "Inactive";
+            EmployeeDatabase.Update("dbo.Office", "OfficeID", office);
             return true;
         }
     }

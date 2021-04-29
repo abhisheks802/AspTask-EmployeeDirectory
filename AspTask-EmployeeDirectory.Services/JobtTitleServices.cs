@@ -18,18 +18,18 @@ namespace AspTask_EmployeeDirectory.Services
         }
         public List<Models.JobTitle> GetJobTitles()
         {
-            var query = EmployeeDatabase.Query<JobTitle>("Select * from dbo.JobTitle").ToList();
+            var query = EmployeeDatabase.Query<JobTitle>("Select * from dbo.JobTitle where JobStatus='Active'").ToList();
             var modelJobList = Mapper.Map<List<JobTitle>, List<Models.JobTitle>>(query);
             return modelJobList;
         }
         public JobTitle GetJobTitle(int jobID)
         {
-            var query = EmployeeDatabase.SingleOrDefault<JobTitle>("Select * from dbo.JobTitle where JobID=" + jobID);
+            var query = EmployeeDatabase.FirstOrDefault<JobTitle>("Select * from dbo.JobTitle where JobID=" + jobID);
             return query;
         }
         public bool AddJob(JobTitle jobTitle)
         {
-            var job = new JobTitle { JobName = jobTitle.JobName};
+            var job = new JobTitle { JobName = jobTitle.JobName, JobStatus=jobTitle.JobStatus};
             EmployeeDatabase.Insert("dbo.JobTitle", job);
             return true;
         }
@@ -40,9 +40,11 @@ namespace AspTask_EmployeeDirectory.Services
             EmployeeDatabase.Update("dbo.JobTitle", "JobID", oldJobDetails);
             return true;
         }
-        public bool DeleteJobTitle(JobTitle jobTitle)
+        public bool DeleteJobTitle(int JobID)
         {
-            EmployeeDatabase.Delete("dbo.JobTitle", "JobID", jobTitle);
+            var job = GetJobTitle(JobID);
+            job.JobStatus = "Inactive";
+            EmployeeDatabase.Update("dbo.JobTitle", "JobID", job);
             return true;
         }
     }

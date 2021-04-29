@@ -19,24 +19,26 @@ namespace AspTask_EmployeeDirectory.Services
         }
         public List<Models.Employee> GetEmployees()
         {
-            var query = EmployeeDatabase.Query<Employee>("Select * from dbo.EmployeeDetails").ToList();
+            var query = EmployeeDatabase.Query<Employee>("Select * from dbo.EmployeeDetails where EmployeeStatus='Active'").ToList();
             var modelEmployeeList = Mapper.Map<List<Employee>, List < Models.Employee >>(query);
             return modelEmployeeList;
         }
         public Employee GetEmployee(int employeeID)
         {
-            var query = EmployeeDatabase.SingleOrDefault<Employee>("Select * from dbo.EmployeeDetails where EmployeeID="+employeeID);
+            var query = EmployeeDatabase.FirstOrDefault<Employee>("Select * from dbo.EmployeeDetails where EmployeeID="+employeeID);
             return query;
         }
         public bool AddEmployee(Employee employee)
         {
-            var emp = new Employee { Firstname = employee.Firstname, Lastname = employee.Lastname, Email = employee.Email, DepartmentID = employee.DepartmentID, JobTitleID = employee.JobTitleID, OfficeID = employee.OfficeID, PhoneNumber = employee.PhoneNumber, SkypeID = employee.SkypeID, PreferredName = employee.PreferredName };
+            var emp = new Employee { Firstname = employee.Firstname, Lastname = employee.Lastname, Email = employee.Email, DepartmentID = employee.DepartmentID, JobTitleID = employee.JobTitleID, OfficeID = employee.OfficeID, PhoneNumber = employee.PhoneNumber, SkypeID = employee.SkypeID, PreferredName = employee.PreferredName, EmployeeStatus = employee.EmployeeStatus };
             EmployeeDatabase.Insert(emp);
             return true;
         }
-        public bool DeleteEmployee(Employee employee)
+        public bool DeleteEmployee(int EmployeeID)
         {
-            EmployeeDatabase.Delete("dbo.EmployeeDetails", "EmployeeID", employee);
+            var employee = GetEmployee(EmployeeID);
+            employee.EmployeeStatus = "Inactive";
+            EmployeeDatabase.Update("dbo.EmployeeDetails", "EmployeeID", employee);
             return true;
         }
         public bool UpdateEmployee(Employee employee)
