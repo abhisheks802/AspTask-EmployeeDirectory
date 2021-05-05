@@ -1,6 +1,6 @@
 import { Component, OnInit,Output,EventEmitter, Input } from '@angular/core';
 import { FilterServiceService } from '../Services/filter-service.service';
-import { Employee } from '../../assets/employee';
+import { Employee } from '../Models/employee';
 import { DepartmentService } from '../Services/department.service';
 import { OfficeService } from '../Services/office.service';
 import { JobTitleService } from '../Services/job-title.service';
