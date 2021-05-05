@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Employee } from 'src/assets/employee';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Department } from 'src/Models/department';
-import { Office } from 'src/Models/office';
-import { JobTitle } from 'src/Models/jobTitle';
+import { Department } from 'src/app/Models/department';
+import { Office } from 'src/app/Models/office';
+import { JobTitle } from 'src/app/Models/jobTitle';
 
 @Injectable({
   providedIn: 'root'

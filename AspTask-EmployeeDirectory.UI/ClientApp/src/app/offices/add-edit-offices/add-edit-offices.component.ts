@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, Output,EventEmitter } from '@angular/core';
 import { FilterServiceService } from 'src/app/filter-service.service';
-import { Office } from 'src/Models/office';
+import { Office } from 'src/app/Models/office';
 
 @Component({
   selector: 'app-add-edit-offices',

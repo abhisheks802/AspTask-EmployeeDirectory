@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 import { FilterServiceService } from 'src/app/filter-service.service';
-import { Department } from 'src/Models/department';
+import { Department } from 'src/app/Models/department';
 
 @Component({
   selector: 'app-add-edit-departments',

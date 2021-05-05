@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 import { FilterServiceService } from 'src/app/filter-service.service';
-import { JobTitle } from 'src/Models/jobTitle';
+import { JobTitle } from 'src/app/Models/jobTitle';
 
 @Component({
   selector: 'app-add-edit-job-title',
