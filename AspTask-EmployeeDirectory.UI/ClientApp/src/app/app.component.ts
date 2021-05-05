@@ -1,6 +1,6 @@
 import { Component,Output,EventEmitter} from '@angular/core';
 import { FilterServiceService } from './filter-service.service';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,8 @@ export class AppComponent {
   public empList:any;
   public selectedEmp:any;
   public allEmployees;
-  constructor(private filterService: FilterServiceService){}
+  public deleteButtonVisibility:boolean = true;
+  constructor(private filterService: FilterServiceService,public router: Router ){}
   updateEmployees(){
     this.filterService.getAllEmployees().subscribe(data => {this.allEmployees = data;
     })

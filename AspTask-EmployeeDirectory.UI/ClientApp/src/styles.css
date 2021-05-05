@@ -5,3 +5,6 @@ body{
 li,button{
     cursor: pointer;
 }
+nav a.active{
+    background-color: #69BA00;
+}

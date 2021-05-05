@@ -1,15 +1,18 @@
 <div class="main-body">
   <app-heading [ngClass] = "message?'content-visibility':''"></app-heading>
-  <div class="all-content">
+  <router-outlet></router-outlet>
+  <div *ngIf="!(router.url.includes('departments') || router.url.includes('offices') || router.url.includes('jobTitles'))" class="all-content">
+    <div class="all-employee-content">
     <app-sidebar [ngClass] = "message?'content-visibility':''" (filteredEmployeesEmitter)="filterEmployees($event)"></app-sidebar>
     <div class="main-content">
-      <app-search-bar [ngClass] = "message?'content-visibility':''" (clearFilter)="updateEmployees()" (filteredEmployeesEmitter)="filterEmployees($event)" [selectedEmp]="selectedEmp" (employeeEmitter)="selectedEmp=$event" (callEmployeeForm) = "message = $event" (something) = "empList = $event"></app-search-bar>
+      <app-search-bar [ngClass] = "message?'content-visibility':''" (clearFilter)="updateEmployees()" (deleteButtonVisibility)="deleteButtonVisibility=$event" (filteredEmployeesEmitter)="filterEmployees($event)" [selectedEmp]="selectedEmp" (employeeEmitter)="selectedEmp=$event" (callEmployeeForm) = "message = $event" (something) = "empList = $event"></app-search-bar>
       <div class="all-emp-activity" [ngClass] = "message?'remove-border':''">
-        <app-adding-employees *ngIf = "message" [selectedEmployee]="selectedEmp"  [message] = 'message' (updateEmployeesEmitter)="updateEmployees()" (cancelEmployeeForm) = "message = $event"></app-adding-employees>
+        <app-adding-employees *ngIf = "message" [deleteButtonVisibility]="deleteButtonVisibility" [selectedEmployee]="selectedEmp"  [message] = 'message' (updateEmployeesEmitter)="updateEmployees()" (cancelEmployeeForm) = "message = $event"></app-adding-employees>
         <div class="all-employees">
-          <app-all-employee-cards [ngClass] = "message?'content-visibility':''" [allEmployees]="allEmployees" [message] = 'message' (employeeEmitter)="selectedEmp=$event"  (displayEmployeeForm) = "message = $event"></app-all-employee-cards>
+          <app-all-employee-cards [ngClass] = "message?'content-visibility':''" [allEmployees]="allEmployees" [message] = 'message' (deleteButtonVisibility)="deleteButtonVisibility=$event" (employeeEmitter)="selectedEmp=$event"  (displayEmployeeForm) = "message = $event"></app-all-employee-cards>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>

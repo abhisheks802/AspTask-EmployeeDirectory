@@ -1,0 +1,5 @@
+<div class="all-departments">
+<div *ngFor="let department of departments" class="depts" (click) = "displayDepartmentDetails(department.departmentID)">
+    <p class="name">{{department.departmentName}}</p>
+</div>
+</div>

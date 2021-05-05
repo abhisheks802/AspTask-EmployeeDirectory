@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
-    <PackageReference Include="PetaPoco" Version="5.1.306" />
     <PackageReference Include="PetaPoco.Compiled" Version="6.0.480" />
     <PackageReference Include="PetaPoco.DBEntityGenerator" Version="0.1.1" />
     <PackageReference Include="SimpleInjector" Version="5.3.0" />

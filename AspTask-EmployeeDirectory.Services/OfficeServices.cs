@@ -9,16 +9,16 @@ namespace AspTask_EmployeeDirectory.Services
 {
     public class OfficeServices:Contracts.IOfficeServices
     {
-        private IDatabase EmployeeDatabase;
+        private Database EmployeeDatabase;
         private AutoMapper.IMapper Mapper { get; set; }
-        public OfficeServices(AutoMapper.IMapper mapper, IDatabase employeeDatabase)
+        public OfficeServices(AutoMapper.IMapper mapper, Database employeeDatabase)
         {
             EmployeeDatabase = employeeDatabase;
             Mapper = mapper;
         }
         public List<Models.Office> GetOffices()
         {
-            var query = EmployeeDatabase.Query<Office>("Select * from dbo.Office where OfficeStatus='Active'").ToList();
+            var query = EmployeeDatabase.Fetch<Office>("Select * from dbo.Office where OfficeStatus='Active'");
             var modelOfficeList = Mapper.Map<List<Office>, List<Models.Office>>(query);
             return modelOfficeList;
         }

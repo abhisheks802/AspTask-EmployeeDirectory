@@ -1,0 +1,3 @@
+<button type="button" [ngClass] = "message?'content-visibility':''" (click)="addDepartment()">Add Department</button>
+<app-show-departments [ngClass] = "message?'content-visibility':''"  (deleteButtonVisibility) = "deleteButtonVisibility = $event" [departments] = "departments" (selectedDepartmentEmitter)="selectedDepartment=$event" [message] = 'message' (displayDepForm) = "message = $event"></app-show-departments>
+<app-add-edit-departments *ngIf = "message" (updateDepartmentsEmitter) = "updateDepartments()" [selectedDepartment] = "selectedDepartment" (hideForm)= "message = $event" [deleteButtonVisibility] = "deleteButtonVisibility"></app-add-edit-departments>

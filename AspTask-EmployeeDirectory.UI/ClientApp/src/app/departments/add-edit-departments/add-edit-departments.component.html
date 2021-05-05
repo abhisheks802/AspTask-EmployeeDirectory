@@ -1,0 +1,8 @@
+<form class="department-details" action="#">
+    <h3>Department Details</h3>
+    <input type="text" placeholder="Enter Department Name" [(ngModel)]="selectedDepartment.departmentName" [ngModelOptions]="{standalone: true}"/>
+    <p class="error-message">{{ errorMessage }}</p>
+    <button type="button" class="add-department" (click) = "checkIfEmpty()">Save</button>
+    <button type="button" [ngClass] = "deleteButtonVisibility?'delete-department':'delete-department-disable'" (click) = "deleteDepartment()" >Delete</button>
+    <button type="button" class="cancel-button" (click) = "cancelEvent()" >Cancel</button>
+</form>

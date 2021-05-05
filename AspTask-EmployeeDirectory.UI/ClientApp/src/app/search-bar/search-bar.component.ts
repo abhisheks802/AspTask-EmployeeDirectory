@@ -9,6 +9,9 @@ import { FilterServiceService } from '../filter-service.service';
 export class SearchBarComponent implements OnInit {
 
   public filters : string[] = [];
+  public departments;
+  public jobTitles;
+  public offices;
   public searchText:string = '';
   public allEmployees;
   public searchFilter:string = "Preferred Name";
@@ -16,6 +19,7 @@ export class SearchBarComponent implements OnInit {
   public filteredEmployees;
   @Input() public selectedEmp:any;
   @Output() filteredEmployeesEmitter = new EventEmitter();
+  @Output() deleteButtonVisibility = new EventEmitter();
   @Output() public employeeEmitter = new EventEmitter();
   @Output() public callEmployeeForm = new EventEmitter();
   @Output() clearFilter = new EventEmitter();
@@ -23,6 +27,9 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit(): void {
   this.filters = this._filterService.getFilters();
+  this._filterService.getAllDepartments().subscribe(data=> {this.departments = data});
+  this._filterService.getAllJobTitles().subscribe(data=> {this.jobTitles = data});
+  this._filterService.getAllOffices().subscribe(data=> {this.offices = data});  
   }
   setLetter(alphabet) {
     if (this.searchFilter === "Preferred Name"){
@@ -32,27 +39,31 @@ export class SearchBarComponent implements OnInit {
          });
       }
     else if(this.searchFilter === "Department"){
+      var department = this.departments.find(dep => dep.departmentName.toLocaleLowerCase().startsWith(alphabet)).departmentID;
       this._filterService.getAllEmployees().subscribe(data => {this.allEmployees = data;
-      this.filteredEmployees = this.allEmployees.filter(emp=>emp.department.toLocaleLowerCase().startsWith(alphabet));
+      this.filteredEmployees = this.allEmployees.filter(emp=>emp.departmentID == department);
       this.filteredEmployeesEmitter.emit(this.filteredEmployees);
    });
     }
     else if(this.searchFilter === "Office"){
+      var office = this.offices.find(ofc => ofc.officeName.toLocaleLowerCase().startsWith(alphabet)).officeID;
         this._filterService.getAllEmployees().subscribe(data => {this.allEmployees = data;
-        this.filteredEmployees = this.allEmployees.filter(emp=>emp.office.toLocaleLowerCase().startsWith(alphabet));
+        this.filteredEmployees = this.allEmployees.filter(emp=>emp.officeID == office);
         this.filteredEmployeesEmitter.emit(this.filteredEmployees);
       });
     }
     else if(this.searchFilter === "Job Title"){
+      var jobTitle = this.jobTitles.find( job => job.jobName.toLocaleLowerCase().startsWith(alphabet)).jobID;
         this._filterService.getAllEmployees().subscribe(data => {this.allEmployees = data;
-        this.filteredEmployees = this.allEmployees.filter(emp=>emp.jobTitle.toLocaleLowerCase().startsWith(alphabet));
+        this.filteredEmployees = this.allEmployees.filter(emp=>emp.jobTitleID == jobTitle);
         this.filteredEmployeesEmitter.emit(this.filteredEmployees);
     });
     }
   }
   fireEvent(){
-    this.selectedEmp = {firstName:"",lastName:"",email:"",jobTitle:"none",office:"none",department:"none",phoneNumber:"",skypeID:"",employeeID:"",preferredName:""};
+    this.selectedEmp = {firstName:"",lastName:"",email:"",jobTitleID:0,officeID:0,departmentID:0,phoneNumber:"",skypeID:"",employeeID:"",preferredName:""};
     this.employeeEmitter.emit(this.selectedEmp);
+    this.deleteButtonVisibility.emit(false);
     this.callEmployeeForm.emit(true);
   }
   searchEmp(searchText){

@@ -1,6 +1,7 @@
 .sidebar{
     margin-top: 20px;
-    padding-left: 40px;
+    margin-right: -40px;
+    padding-left: 70px;
     width: 350px;
     display: flex;
     flex-direction: column;
@@ -14,7 +15,7 @@
     margin-bottom: 20px;
 }
 .sidebar ul li{
-    font-size: 12px;
+    font-size: 14px;
     list-style: none;
     margin-top: -15px;
 }

@@ -1,0 +1,8 @@
+<form class="jobTitle-details" action="#">
+    <h3>Job-Title Details</h3>
+    <input type="text" placeholder="Enter Job Title" [(ngModel)]="selectedJobTitle.jobName" [ngModelOptions]="{standalone: true}"/>
+    <p class="error-message">{{ errorMessage }}</p>
+    <button type="button" class="add-jobTitle" (click) = "checkIfEmpty()">Save</button>
+    <button type="button" [ngClass] = "deleteButtonVisibility?'delete-jobTitle':'delete-jobTitle-disable'" (click) = "deleteJobTitle()" >Delete</button>
+    <button type="button" class="cancel-button" (click) = "cancelEvent()" >Cancel</button>
+</form>

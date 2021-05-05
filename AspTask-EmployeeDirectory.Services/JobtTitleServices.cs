@@ -9,16 +9,16 @@ namespace AspTask_EmployeeDirectory.Services
 {
     public class JobtTitleServices:Contracts.IJobTitleServices
     {
-        private IDatabase EmployeeDatabase;
+        private Database EmployeeDatabase;
         private AutoMapper.IMapper Mapper { get; set; }
-        public JobtTitleServices(AutoMapper.IMapper mapper, IDatabase employeeDatabase)
+        public JobtTitleServices(AutoMapper.IMapper mapper, Database employeeDatabase)
         {
             EmployeeDatabase = employeeDatabase;
             Mapper = mapper;
         }
         public List<Models.JobTitle> GetJobTitles()
         {
-            var query = EmployeeDatabase.Query<JobTitle>("Select * from dbo.JobTitle where JobStatus='Active'").ToList();
+            var query = EmployeeDatabase.Fetch<JobTitle>("Select * from dbo.JobTitle where JobStatus='Active'");
             var modelJobList = Mapper.Map<List<JobTitle>, List<Models.JobTitle>>(query);
             return modelJobList;
         }

@@ -23,8 +23,9 @@
 #propic{
     height: 210px;
     width: 230px;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-bottom: 40px;
+    margin-left: 15px;
     cursor:auto;
 }
 #propic:focus{
@@ -88,4 +89,22 @@ label{
     height: 40px;
     padding-left: 10px;
     cursor: pointer;
+}
+.form-heading{
+    text-align: center;
+    
+}
+.delete-employee{
+    margin-left: 20px;
+    height: 40px;
+    width: 200px;
+    padding-left: 10px;
+    margin-top: 8px;
+    font-size: 16px;
+    background: red;
+    border: none;
+    color: white;
+}
+.delete-employee-disable{
+    display: none;
 }

@@ -13,6 +13,7 @@ export class AllEmployeeCardsComponent implements OnInit {
   @Input() public allEmployees;
   @Output() public displayEmployeeForm = new EventEmitter();
   @Output() public employeeEmitter = new EventEmitter();
+  @Output() public deleteButtonVisibility = new EventEmitter();
   constructor(private filterService: FilterServiceService) { }
   
   ngOnInit(): void {
@@ -30,5 +31,6 @@ export class AllEmployeeCardsComponent implements OnInit {
     })
     this.message = true;
     this.displayEmployeeForm.emit(this.message);
+    this.deleteButtonVisibility.emit(true);
   }
 }

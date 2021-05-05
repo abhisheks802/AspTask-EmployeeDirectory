@@ -40,12 +40,12 @@ namespace AspTask_EmployeeDirectory
             services.AddSingleton<Contracts.IOfficeServices, Services.OfficeServices>();
             services.AddSingleton<Contracts.IJobTitleServices, Services.JobtTitleServices>();
             services.AddAutoMapper(typeof(AutoMappingProfile));
-            var connection = DatabaseConfiguration.Build()
-                .UsingConnectionString(Configuration.GetConnectionString("DatabaseConnection"))
-                .UsingProviderName("System.Data.SqlClient")
-                .Create();
+            var connection = new Database(Configuration.GetConnectionString("DatabaseConnection"), "System.Data.SqlClient");
+            connection.OpenSharedConnection();
             services.AddSingleton(connection);
         }
+        //"System.Data.SqlClient"
+        //Configuration.GetConnectionString("DatabaseConnection")
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

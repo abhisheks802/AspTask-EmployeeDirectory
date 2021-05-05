@@ -1,0 +1,26 @@
+.nav-bar {
+    nav{
+    display: flex;
+    flex-direction: row;
+    margin-top: -10px;
+    margin-left: 40px;
+    border-bottom: 1px solid lightgrey;
+    width: 93vw;
+    background: #00B1FC;
+    padding-bottom: 12px;
+        a{
+            padding:15px 30px;
+            margin-bottom: -12px;
+            height: 20px;
+            font-size: 17px;
+            border-right: 1px solid white;
+            text-decoration: none;
+            color: white;
+        }
+        
+        a:hover{
+            background: #7dde00;
+        }
+    }
+
+}

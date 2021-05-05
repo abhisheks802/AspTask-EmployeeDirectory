@@ -1,8 +1,8 @@
-.mainb-body{
+.main-body{
     display: flex;
     flex-direction: column;
 }
-.all-content{
+.all-employee-content{
     display: flex;
     flex-direction: row;
 }
