@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
-import { FilterServiceService } from 'src/app/filter-service.service';
+import { FilterServiceService } from 'src/app/Services/filter-service.service';
 import { Department } from 'src/app/Models/department';
 
 @Component({

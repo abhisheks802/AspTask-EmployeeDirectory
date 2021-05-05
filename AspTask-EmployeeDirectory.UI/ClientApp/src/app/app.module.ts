@@ -6,7 +6,7 @@ import { HeadingComponent } from './heading/heading.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { AddingEmployeesComponent } from './adding-employees/adding-employees.component';
-import { FilterServiceService } from './filter-service.service';
+import { FilterServiceService } from './Services/filter-service.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
