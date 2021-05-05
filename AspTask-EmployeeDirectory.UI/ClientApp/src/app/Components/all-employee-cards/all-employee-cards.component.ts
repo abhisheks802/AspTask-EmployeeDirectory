@@ -1,5 +1,5 @@
 import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
-import { FilterServiceService } from '../Services/filter-service.service';
+import { FilterServiceService } from 'src/app/Services/filter-service.service';
 
 @Component({
   selector: 'app-all-employee-cards',

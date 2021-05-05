@@ -1,8 +1,8 @@
 import { Component, OnInit, Output,EventEmitter, Input } from '@angular/core';
-import { DepartmentService } from '../Services/department.service';
-import { FilterServiceService } from '../Services/filter-service.service';
-import { JobTitleService } from '../Services/job-title.service';
-import { OfficeService } from '../Services/office.service';
+import { DepartmentService } from 'src/app/Services/department.service';
+import { FilterServiceService } from 'src/app/Services/filter-service.service';
+import { JobTitleService } from 'src/app/Services/job-title.service';
+import { OfficeService } from 'src/app/Services/office.service';
 
 @Component({
   selector: 'app-sidebar',
