@@ -1,5 +1,5 @@
 import { Component, Input ,OnInit, Output,EventEmitter } from '@angular/core';
-import { FilterServiceService } from 'src/app/Services/filter-service.service';
+import { DepartmentService } from 'src/app/Services/department.service';
 
 
 @Component({
@@ -13,13 +13,13 @@ export class ShowDepartmentsComponent implements OnInit {
   @Output() public selectedDepartmentEmitter = new EventEmitter();
   @Output() public displayDepForm = new EventEmitter();
   @Output() public deleteButtonVisibility = new EventEmitter();
-  constructor(private filterService: FilterServiceService) { }
+  constructor(private departmentService:DepartmentService) { }
 
   ngOnInit(): void {
-    this.filterService.getAllDepartments().subscribe(dept => this.departments = dept);
+    this.departmentService.getAllDepartments().subscribe(dept => this.departments = dept);
   }
   displayDepartmentDetails(id){
-    this.filterService.getAllDepartments().subscribe(data => {this.departments = data
+    this.departmentService.getAllDepartments().subscribe(data => {this.departments = data
      var selecteddepartment = this.departments.find(dep => dep.departmentID == id);
      this.selectedDepartmentEmitter.emit(selecteddepartment);
     })

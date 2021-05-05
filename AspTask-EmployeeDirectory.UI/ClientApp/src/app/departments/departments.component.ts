@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FilterServiceService } from '../Services/filter-service.service';
+import { DepartmentService } from '../Services/department.service';
 
 @Component({
   selector: 'app-departments',
@@ -12,7 +12,7 @@ export class DepartmentsComponent implements OnInit {
   public message = false;
   public selectedDepartment;
   public deleteButtonVisibility:boolean = true;
-  constructor(private filterService: FilterServiceService) { }
+  constructor(private departmentService:DepartmentService) { }
 
   ngOnInit(): void {
     this.updateDepartments()
@@ -23,6 +23,6 @@ export class DepartmentsComponent implements OnInit {
     this.deleteButtonVisibility = false;
   }
   updateDepartments(){
-    this.filterService.getAllDepartments().subscribe(data =>this.departments = data);
+    this.departmentService.getAllDepartments().subscribe(data =>this.departments = data);
   }
 }

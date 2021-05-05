@@ -1,5 +1,6 @@
 import { Component, OnInit, Output,EventEmitter,Input } from '@angular/core';
 import { FilterServiceService } from '../Services/filter-service.service';
+import { DepartmentService } from '../Services/department.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -23,11 +24,11 @@ export class SearchBarComponent implements OnInit {
   @Output() public employeeEmitter = new EventEmitter();
   @Output() public callEmployeeForm = new EventEmitter();
   @Output() clearFilter = new EventEmitter();
-  constructor(private _filterService: FilterServiceService) { }
+  constructor(private _filterService: FilterServiceService, private departmentService:DepartmentService) { }
 
   ngOnInit(): void {
   this.filters = this._filterService.getFilters();
-  this._filterService.getAllDepartments().subscribe(data=> {this.departments = data});
+  this.departmentService.getAllDepartments().subscribe(data=> {this.departments = data});
   this._filterService.getAllJobTitles().subscribe(data=> {this.jobTitles = data});
   this._filterService.getAllOffices().subscribe(data=> {this.offices = data});  
   }

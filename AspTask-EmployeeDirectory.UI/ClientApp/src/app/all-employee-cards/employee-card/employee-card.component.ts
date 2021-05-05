@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DepartmentService } from 'src/app/Services/department.service';
 import { FilterServiceService } from 'src/app/Services/filter-service.service';
 
 @Component({
@@ -14,10 +15,10 @@ export class EmployeeCardComponent implements OnInit {
   public allJobTitles;
   @Input() public employee;
 
-  constructor(private filterService: FilterServiceService) { }
+  constructor(private filterService: FilterServiceService,private departmentService:DepartmentService) { }
 
   ngOnInit(): void {
-    this.filterService.getAllDepartments().subscribe(data=> {this.allDepartments = data;
+    this.departmentService.getAllDepartments().subscribe(data=> {this.allDepartments = data;
       this.departmentName = this.allDepartments.find(dep => dep.departmentID == this.employee.departmentID).departmentName;
        })
     this.filterService.getAllJobTitles().subscribe(data=> {this.allJobTitles = data;

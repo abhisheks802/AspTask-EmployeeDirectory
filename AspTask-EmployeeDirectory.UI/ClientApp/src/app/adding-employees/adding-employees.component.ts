@@ -1,6 +1,7 @@
 import { Component, OnInit,Output,EventEmitter, Input } from '@angular/core';
 import { FilterServiceService } from '../Services/filter-service.service';
 import { Employee } from '../../assets/employee';
+import { DepartmentService } from '../Services/department.service';
 
 @Component({
   selector: 'app-adding-employees',
@@ -22,9 +23,9 @@ export class AddingEmployeesComponent implements OnInit {
   @Input() public selectedEmployee:any;
   @Output() public updateEmployeesEmitter = new EventEmitter(); 
   @Output() public cancelEmployeeForm = new EventEmitter();
-  constructor(private _filterService: FilterServiceService) {}
+  constructor(private _filterService: FilterServiceService, private departmentService:DepartmentService) {}
   ngOnInit(): void {
-    this._filterService.getAllDepartments().subscribe(data=> {this.departments = data
+    this.departmentService.getAllDepartments().subscribe(data=> {this.departments = data
     this.departmentName = this.departments.find(dep => dep.departmentID == this.selectedEmployee.departmentID).departmentName;
     });
     this._filterService.getAllJobTitles().subscribe(data=> {this.jobTitles = data

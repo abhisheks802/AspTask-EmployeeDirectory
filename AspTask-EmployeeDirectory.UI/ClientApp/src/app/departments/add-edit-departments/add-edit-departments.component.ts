@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
-import { FilterServiceService } from 'src/app/Services/filter-service.service';
 import { Department } from 'src/app/Models/department';
+import { DepartmentService } from 'src/app/Services/department.service';
 
 @Component({
   selector: 'app-add-edit-departments',
@@ -14,7 +14,7 @@ export class AddEditDepartmentsComponent implements OnInit {
   @Input() public deleteButtonVisibility;
   @Output() public hideForm = new EventEmitter();
   @Output() public updateDepartmentsEmitter = new EventEmitter();
-  constructor(private filterService: FilterServiceService) { }
+  constructor(private departmentService:DepartmentService) { }
 
   ngOnInit(): void {
   }
@@ -30,17 +30,17 @@ export class AddEditDepartmentsComponent implements OnInit {
     let department:Department = new Department();
     department.departmentName = this.selectedDepartment.departmentName;
     department.departmentStatus = "Active";
-    this.filterService.getAllDepartments().subscribe(data => {this.departments = data
+    this.departmentService.getAllDepartments().subscribe(data => {this.departments = data
     var findDepartment = this.departments.find(dep => dep.departmentID == this.selectedDepartment.departmentID);
     if(findDepartment != null){
       department.departmentID = this.selectedDepartment.departmentID;
-      this.filterService.updateDepartment(department).subscribe(res=>{
+      this.departmentService.updateDepartment(department).subscribe(res=>{
         this.updateDepartmentsEmitter.emit(department);
         this.cancelEvent();
       })
     }
     else{
-      this.filterService.addDepartment(department).subscribe(res =>{
+      this.departmentService.addDepartment(department).subscribe(res =>{
         this.cancelEvent();
         this.updateDepartmentsEmitter.emit(department);
       })
@@ -52,7 +52,7 @@ export class AddEditDepartmentsComponent implements OnInit {
   }
   deleteDepartment(){
     var depID = this.selectedDepartment.departmentID;
-    this.filterService.deleteDepartment(depID).subscribe(res=>{
+    this.departmentService.deleteDepartment(depID).subscribe(res=>{
       this.updateDepartmentsEmitter.emit(depID);
       this.cancelEvent();
     })

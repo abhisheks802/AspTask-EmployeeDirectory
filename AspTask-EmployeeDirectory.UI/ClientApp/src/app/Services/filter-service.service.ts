@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Employee } from 'src/assets/employee';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Department } from 'src/app/Models/department';
 import { Office } from 'src/app/Models/office';
 import { JobTitle } from 'src/app/Models/jobTitle';
 
@@ -36,18 +35,6 @@ export class FilterServiceService {
   }
   deleteEmployee(val:Employee):Observable<Employee>{
     return this.http.get<Employee>(this.APIUrl+'/Employee/'+ val);
-  }
-  getAllDepartments():Observable<any[]>{
-    return this.http.get<any>(this.APIUrl+'/Department');
-  }
-  addDepartment(val:Department):Observable<Department>{
-    return this.http.post<Department>(this.APIUrl+'/Department',val);
-  }
-  updateDepartment(val:Department):Observable<Department>{
-    return this.http.put<Department>(this.APIUrl+'/Department',val);
-  }
-  deleteDepartment(val:Department):Observable<Department>{
-    return this.http.get<Department>(this.APIUrl+'/Department/'+ val);
   }
   getAllOffices():Observable<any[]>{
     return this.http.get<any>(this.APIUrl+'/Office');
