@@ -2,6 +2,7 @@ import { Component, OnInit,Output,EventEmitter, Input } from '@angular/core';
 import { FilterServiceService } from '../Services/filter-service.service';
 import { Employee } from '../../assets/employee';
 import { DepartmentService } from '../Services/department.service';
+import { OfficeService } from '../Services/office.service';
 
 @Component({
   selector: 'app-adding-employees',
@@ -23,7 +24,7 @@ export class AddingEmployeesComponent implements OnInit {
   @Input() public selectedEmployee:any;
   @Output() public updateEmployeesEmitter = new EventEmitter(); 
   @Output() public cancelEmployeeForm = new EventEmitter();
-  constructor(private _filterService: FilterServiceService, private departmentService:DepartmentService) {}
+  constructor(private _filterService: FilterServiceService, private departmentService:DepartmentService, private officeService: OfficeService) {}
   ngOnInit(): void {
     this.departmentService.getAllDepartments().subscribe(data=> {this.departments = data
     this.departmentName = this.departments.find(dep => dep.departmentID == this.selectedEmployee.departmentID).departmentName;
@@ -31,7 +32,7 @@ export class AddingEmployeesComponent implements OnInit {
     this._filterService.getAllJobTitles().subscribe(data=> {this.jobTitles = data
     this.jobName = this.jobTitles.find(job => job.jobID == this.selectedEmployee.jobTitleID).jobName;
     });
-    this._filterService.getAllOffices().subscribe(data=> {this.offices = data
+    this.officeService.getAllOffices().subscribe(data=> {this.offices = data
       this.officeName = this.offices.find(off => off.officeID == this.selectedEmployee.officeID).officeName;
     });
   }

@@ -1,5 +1,5 @@
 import { Component,Output,EventEmitter, Input, OnInit } from '@angular/core';
-import { FilterServiceService } from 'src/app/Services/filter-service.service';
+import { OfficeService } from 'src/app/Services/office.service';
 
 @Component({
   selector: 'app-show-offices',
@@ -12,13 +12,13 @@ export class ShowOfficesComponent implements OnInit {
   @Output() public selectedOfficeEmitter = new EventEmitter();
   @Output() public displayOfcForm = new EventEmitter();
   @Output() public deleteButtonVisibility = new EventEmitter();
-  constructor(private filterService: FilterServiceService) { }
+  constructor(private officeService: OfficeService) { }
 
   ngOnInit(): void {
-    this.filterService.getAllOffices().subscribe(ofc => this.offices = ofc);
+    this.officeService.getAllOffices().subscribe(ofc => this.offices = ofc);
   }
   displayOfficeDetails(id){
-    this.filterService.getAllOffices().subscribe(data => {this.offices = data
+    this.officeService.getAllOffices().subscribe(data => {this.offices = data
      var selectedoffice = this.offices.find(ofc => ofc.officeID == id);
      this.selectedOfficeEmitter.emit(selectedoffice);
     })

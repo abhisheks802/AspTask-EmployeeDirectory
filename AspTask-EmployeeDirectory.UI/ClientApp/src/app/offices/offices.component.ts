@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FilterServiceService } from '../Services/filter-service.service';
+import { OfficeService } from '../Services/office.service';
 
 @Component({
   selector: 'app-offices',
@@ -12,7 +12,7 @@ export class OfficesComponent implements OnInit {
   public selectedOffice;
   public offices;
   public deleteButtonVisibility:boolean = true;
-  constructor(private filterService: FilterServiceService) { }
+  constructor(private officeService: OfficeService) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +22,7 @@ export class OfficesComponent implements OnInit {
     this.deleteButtonVisibility = false;
   }
   updateOffices(){
-    this.filterService.getAllOffices().subscribe(data =>this.offices = data);
+    this.officeService.getAllOffices().subscribe(data =>this.offices = data);
 
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output,EventEmitter,Input } from '@angular/core';
 import { FilterServiceService } from '../Services/filter-service.service';
 import { DepartmentService } from '../Services/department.service';
+import { OfficeService } from '../Services/office.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -24,13 +25,13 @@ export class SearchBarComponent implements OnInit {
   @Output() public employeeEmitter = new EventEmitter();
   @Output() public callEmployeeForm = new EventEmitter();
   @Output() clearFilter = new EventEmitter();
-  constructor(private _filterService: FilterServiceService, private departmentService:DepartmentService) { }
+  constructor(private _filterService: FilterServiceService, private departmentService:DepartmentService, private officeService: OfficeService) { }
 
   ngOnInit(): void {
   this.filters = this._filterService.getFilters();
   this.departmentService.getAllDepartments().subscribe(data=> {this.departments = data});
   this._filterService.getAllJobTitles().subscribe(data=> {this.jobTitles = data});
-  this._filterService.getAllOffices().subscribe(data=> {this.offices = data});  
+  this.officeService.getAllOffices().subscribe(data=> {this.offices = data});  
   }
   setLetter(alphabet) {
     if (this.searchFilter === "Preferred Name"){
