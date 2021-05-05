@@ -3,6 +3,7 @@ import { FilterServiceService } from '../Services/filter-service.service';
 import { Employee } from '../../assets/employee';
 import { DepartmentService } from '../Services/department.service';
 import { OfficeService } from '../Services/office.service';
+import { JobTitleService } from '../Services/job-title.service';
 
 @Component({
   selector: 'app-adding-employees',
@@ -24,12 +25,13 @@ export class AddingEmployeesComponent implements OnInit {
   @Input() public selectedEmployee:any;
   @Output() public updateEmployeesEmitter = new EventEmitter(); 
   @Output() public cancelEmployeeForm = new EventEmitter();
-  constructor(private _filterService: FilterServiceService, private departmentService:DepartmentService, private officeService: OfficeService) {}
+  constructor(private _filterService: FilterServiceService, private departmentService:DepartmentService
+    , private officeService: OfficeService, private jobTitleService: JobTitleService) {}
   ngOnInit(): void {
     this.departmentService.getAllDepartments().subscribe(data=> {this.departments = data
     this.departmentName = this.departments.find(dep => dep.departmentID == this.selectedEmployee.departmentID).departmentName;
     });
-    this._filterService.getAllJobTitles().subscribe(data=> {this.jobTitles = data
+    this.jobTitleService.getAllJobTitles().subscribe(data=> {this.jobTitles = data
     this.jobName = this.jobTitles.find(job => job.jobID == this.selectedEmployee.jobTitleID).jobName;
     });
     this.officeService.getAllOffices().subscribe(data=> {this.offices = data

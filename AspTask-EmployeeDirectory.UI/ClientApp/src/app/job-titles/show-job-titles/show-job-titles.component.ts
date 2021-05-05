@@ -1,5 +1,5 @@
 import { Component, Input ,OnInit, Output,EventEmitter } from '@angular/core';
-import { FilterServiceService } from 'src/app/Services/filter-service.service';
+import { JobTitleService } from 'src/app/Services/job-title.service';
 
 @Component({
   selector: 'app-show-job-titles',
@@ -13,13 +13,13 @@ export class ShowJobTitlesComponent implements OnInit {
   @Output() public selectedJobTitleEmitter = new EventEmitter();
   @Output() public displayJobForm = new EventEmitter();
   @Output() public deleteButtonVisibility = new EventEmitter();
-  constructor(private filterService: FilterServiceService) { }
+  constructor(private jobTitleService: JobTitleService) { }
 
   ngOnInit(): void {
-    this.filterService.getAllJobTitles().subscribe(job => this.jobTitles = job);
+    this.jobTitleService.getAllJobTitles().subscribe(job => this.jobTitles = job);
   }
   displayJobTitleDetails(id){
-    this.filterService.getAllJobTitles().subscribe(data => {this.jobTitles = data
+    this.jobTitleService.getAllJobTitles().subscribe(data => {this.jobTitles = data
      var selectedJob = this.jobTitles.find(job => job.jobID == id);
      this.selectedJobTitleEmitter.emit(selectedJob);
     })

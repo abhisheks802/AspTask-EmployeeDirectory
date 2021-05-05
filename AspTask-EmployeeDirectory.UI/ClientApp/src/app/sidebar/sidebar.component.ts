@@ -1,6 +1,7 @@
 import { Component, OnInit, Output,EventEmitter, Input } from '@angular/core';
 import { DepartmentService } from '../Services/department.service';
 import { FilterServiceService } from '../Services/filter-service.service';
+import { JobTitleService } from '../Services/job-title.service';
 import { OfficeService } from '../Services/office.service';
 
 @Component({
@@ -16,12 +17,13 @@ export class SidebarComponent implements OnInit {
   public filteredEmployees;
   @Input() allEmployees;
   @Output() filteredEmployeesEmitter = new EventEmitter();
-  constructor(private _filterService: FilterServiceService,private departmentService:DepartmentService, private officeService: OfficeService) { }
+  constructor(private _filterService: FilterServiceService,private departmentService:DepartmentService
+    , private officeService: OfficeService, private jobTitleService: JobTitleService) { }
 
   ngOnInit() {
     this.departmentService.getAllDepartments().subscribe(data => this.departments = data);
     this.officeService.getAllOffices().subscribe(data => this.offices = data);
-    this._filterService.getAllJobTitles().subscribe(data => this.jobTitles = data);
+    this.jobTitleService.getAllJobTitles().subscribe(data => this.jobTitles = data);
     this._filterService.getAllEmployees().subscribe(data => {this.allEmployees = data;
     });
   }

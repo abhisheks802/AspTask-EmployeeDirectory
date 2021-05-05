@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FilterServiceService } from '../Services/filter-service.service';
+import { JobTitleService } from '../Services/job-title.service';
 
 @Component({
   selector: 'app-job-titles',
@@ -12,7 +12,7 @@ export class JobTitlesComponent implements OnInit {
   public message = false;
   public selectedJobTitle;
   public deleteButtonVisibility:boolean = true;
-  constructor(private filterService: FilterServiceService) { }
+  constructor(private jobTitleService: JobTitleService) { }
 
   ngOnInit(): void {
     this.updateJobTitles()
@@ -23,7 +23,7 @@ export class JobTitlesComponent implements OnInit {
     this.deleteButtonVisibility = false;
   }
   updateJobTitles(){
-    this.filterService.getAllJobTitles().subscribe(data =>this.jobTitles = data);
+    this.jobTitleService.getAllJobTitles().subscribe(data =>this.jobTitles = data);
   }
 
 }

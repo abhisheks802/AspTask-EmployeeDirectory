@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DepartmentService } from 'src/app/Services/department.service';
-import { FilterServiceService } from 'src/app/Services/filter-service.service';
+import { JobTitleService } from 'src/app/Services/job-title.service';
 
 @Component({
   selector: 'app-employee-card',
@@ -15,13 +15,13 @@ export class EmployeeCardComponent implements OnInit {
   public allJobTitles;
   @Input() public employee;
 
-  constructor(private filterService: FilterServiceService,private departmentService:DepartmentService) { }
+  constructor(private departmentService:DepartmentService,private jobTitleService: JobTitleService) { }
 
   ngOnInit(): void {
     this.departmentService.getAllDepartments().subscribe(data=> {this.allDepartments = data;
       this.departmentName = this.allDepartments.find(dep => dep.departmentID == this.employee.departmentID).departmentName;
        })
-    this.filterService.getAllJobTitles().subscribe(data=> {this.allJobTitles = data;
+    this.jobTitleService.getAllJobTitles().subscribe(data=> {this.allJobTitles = data;
       var job = this.allJobTitles.find(job => job.jobID == this.employee.jobTitleID);
       this.jobTitleName = job.jobName;
     })

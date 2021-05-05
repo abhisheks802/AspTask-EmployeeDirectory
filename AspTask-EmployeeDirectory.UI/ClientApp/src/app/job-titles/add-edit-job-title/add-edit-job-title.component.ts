@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
-import { FilterServiceService } from 'src/app/Services/filter-service.service';
 import { JobTitle } from 'src/app/Models/jobTitle';
+import { JobTitleService } from 'src/app/Services/job-title.service';
 
 @Component({
   selector: 'app-add-edit-job-title',
@@ -15,7 +15,7 @@ export class AddEditJobTitleComponent implements OnInit {
   @Input() public deleteButtonVisibility;
   @Output() public hideForm = new EventEmitter();
   @Output() public updateJobTitlesEmitter = new EventEmitter();
-  constructor(private filterService: FilterServiceService) { }
+  constructor(private jobTitleService: JobTitleService) { }
 
   ngOnInit(): void {
   }
@@ -31,17 +31,17 @@ export class AddEditJobTitleComponent implements OnInit {
     let jobTitle:JobTitle = new JobTitle();
     jobTitle.jobName = this.selectedJobTitle.jobName;
     jobTitle.jobStatus = "Active";
-    this.filterService.getAllJobTitles().subscribe(data => {this.jobTitles = data
+    this.jobTitleService.getAllJobTitles().subscribe(data => {this.jobTitles = data
     var findJob = this.jobTitles.find(job => job.jobID == this.selectedJobTitle.jobID);
     if(findJob != null){
       jobTitle.jobID = this.selectedJobTitle.jobID;
-      this.filterService.updateJob(jobTitle).subscribe(res=>{
+      this.jobTitleService.updateJob(jobTitle).subscribe(res=>{
         this.updateJobTitlesEmitter.emit(jobTitle);
         this.cancelEvent();
       })
     }
     else{
-      this.filterService.addJob(jobTitle).subscribe(res =>{
+      this.jobTitleService.addJob(jobTitle).subscribe(res =>{
         this.cancelEvent();
         this.updateJobTitlesEmitter.emit(jobTitle);
       })
@@ -53,7 +53,7 @@ export class AddEditJobTitleComponent implements OnInit {
   }
   deleteJobTitle(){
     var jobID = this.selectedJobTitle.jobID;
-    this.filterService.deleteJob(jobID).subscribe(res=>{
+    this.jobTitleService.deleteJob(jobID).subscribe(res=>{
       this.updateJobTitlesEmitter.emit(jobID);
       this.cancelEvent();
     })
